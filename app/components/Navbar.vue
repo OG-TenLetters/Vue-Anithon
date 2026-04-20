@@ -1,11 +1,7 @@
-<script setup>
-import { ref } from 'vue';
-const isEnglish = ref(true);
-const toggleLanguage = () => {
-  isEnglish.value = !isEnglish.value;
-  console.log(isEnglish.value)
-};
-
+<script setup lang="ts">
+import LanguageToggle from "./Navbar/LanguageToggle.vue";
+import NavLink from "./Navbar/NavLink.vue";
+import OptionsModal from "./Navbar/OptionsModal.vue";
 </script>
 
 <template>
@@ -20,28 +16,15 @@ const toggleLanguage = () => {
       <input name="search" id="search" placeholder="Search Anime..." />
     </div>
     <div class="mx-10 flex gap-x-7 font-semibold text-white uppercase">
-      <h1>Genres</h1>
-      <h1>Type</h1>
-      <h1>New Releases</h1>
-      <h1>Updates</h1>
-      <h1>Ongoing</h1>
-      <h1>Recent</h1>
+      <OptionsModal name="Genres" link-frag-items="/genres" link-frag2-items="" url="mock-url"/>
+      <OptionsModal name="Type" link-frag-items="" link-frag2-items="" url="mock-url"/>
+      <NavLink class="hover:text-neutral-200" name="New Releases" linkFrag="/new-releases" link-frag2="" url="mock-url" />
+      <NavLink class="hover:text-neutral-200" name="Updates" linkFrag="/updates" link-frag2="" url="mock-url" />
+      <NavLink class="hover:text-neutral-200" name="Ongoing" linkFrag="/ongoing" link-frag2="" url="mock-url" />
+      <NavLink class="hover:text-neutral-200" name="Recent" linkFrag="/recent" link-frag2="" url="mock-url" />
     </div>
     <div class="flex items-center gap-x-4">
-      <button @click="toggleLanguage" class="mr-5 flex font-semibold cursor-pointer">
-        <div
-        class="rounded-lg px-4 py-1 inset-shadow-sm transition-all duration-300"
-          :class="isEnglish ? 'bg-purple-900 text-white z-1 inset-shadow-purple-300' : 'bg-sky-600 text-black inset-shadow-sky-950'""
-        >
-          en
-        </div>
-        <div
-        class="-ml-2 rounded-lg px-4 py-1 inset-shadow-sm transition-all duration-300"
-          :class="isEnglish ? 'bg-sky-600 text-black inset-shadow-sky-950' : 'bg-purple-900 text-white z-4 inset-shadow-purple-300'"
-        >
-          jp
-        </div>
-      </button>
+      <LanguageToggle />
       <Icon class="text-2xl text-white" name="mingcute:sun-fill" />
       <figure
         class="h-9 w-9 rotate-45 overflow-hidden rounded-xs bg-white shadow-lg shadow-sky-900"
