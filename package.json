@@ -1,0 +1,29 @@
+{
+  "name": "vue-anithon",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.11.3",
+    "@tailwindcss/vite": "^4.2.2",
+    "embla-carousel-vue": "^8.6.0",
+    "gooey-toast-vue": "^0.3.1",
+    "kill-port": "^2.0.1",
+    "nuxt": "^4.4.2",
+    "tailwindcss": "^4.2.2",
+    "vue": "^3.5.32",
+    "vue-router": "^5.0.4"
+  },
+  "devDependencies": {
+    "@iconify-json/mingcute": "^1.2.7",
+    "@nuxt/icon": "^2.2.1",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.7.2"
+  }
+}
