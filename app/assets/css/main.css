@@ -2,4 +2,32 @@
 
 body {
     background: #143e46;
+    /* background: #31cfeebb; */
+}
+
+.banner1 {
+    left: 0;
+}
+.banner2 {
+    right: 0;
+}
+.banner3 {
+    left: 19.5%;
+}
+.banner4 {
+    left: 60.5%;
+}
+.banner5 {
+    left: 40%;
+    right: 40%;
+    transform: scaleX(1.1);
+}
+
+.banner1, .banner2, .banner3, .banner4, .banner5 {
+    filter: grayscale(1);
+    opacity: .1;
+    position: fixed;
+    top: 0;
+    width: 20%;
+    z-index: -1;
 }
