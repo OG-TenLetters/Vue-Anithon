@@ -7,9 +7,9 @@ import AnimeCarousel from "~/components/Pages/HomePage/AnimeCarousel.vue";
     <AnimeCarousel />
     <div class="flex flex-col gap-y-4 px-10">
       <div
-        class="flex h-full w-full items-center justify-center gap-x-2 rounded-3xl bg-[#1c0d35]/90 text-white"
+        class="flex h-full w-full justify-center gap-x-2 rounded-3xl bg-[#1c0d35]/90 text-white"
       >
-        <div class="flex w-7/10 flex-col gap-y-2">
+        <div class="flex w-8/11 flex-col gap-y-2">
           <!-- SHAREBOX -->
           <div
             class="flex h-1/5 w-full items-center justify-between rounded-2xl bg-[#140925] px-9 py-6"
@@ -71,17 +71,10 @@ import AnimeCarousel from "~/components/Pages/HomePage/AnimeCarousel.vue";
           <Divider />
           <AnimeCardContainer header="Recommended" :count="6" />
         </div>
-        <div class="flex w-3/10 flex-col gap-y-2">
-          <div
-            class="flex h-1/2 items-center justify-center rounded-2xl bg-amber-700"
-          >
-            nope
-          </div>
-          <div
-            class="flex h-1/2 items-center justify-center rounded-2xl bg-amber-950"
-          >
-            norpme
-          </div>
+        <div class="flex w-3/11 max-w-100 flex-col ml-12 mr-7 justify-start gap-y-9">
+          <!-- TRENDING__Box -->
+           <Trending />
+           <Trending />
         </div>
       </div>
       <div

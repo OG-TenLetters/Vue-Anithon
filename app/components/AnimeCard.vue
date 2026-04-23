@@ -27,7 +27,7 @@ const close = () => {
         <!-- ANIMECARD__Hover-Popup -->
         <div
           v-if="show"
-          class="absolute -top-3 -right-65 mt-2 w-72 rounded-xl border-white/10 bg-linear-to-b from-sky-800/85 to-purple-950/80 px-8 py-5 text-white shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm"
+          class="absolute -top-3 -right-65 mt-2 w-72 rounded-xl border-white/10 bg-linear-to-b from-sky-950/85 to-purple-950/80 px-8 py-5 text-white shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm"
         >
         <div class="border bg-white flex items-center justify-center overflow-hidden rounded-full absolute top-1 left-1">
         <Icon class=" bg-blue-950 text-2xl" name="mingcute:information-fill" />
@@ -65,7 +65,7 @@ const close = () => {
           </div>
 
           <button
-            class="mt-2 w-full rounded-lg border-2 border-white/20 bg-purple-950 px-3 py-1 tracking-wider text-purple-200 transition-all duration-300 hover:border-gray-400 hover:text-gray-100 hover:active:border-sky-600 hover:active:bg-transparent hover:active:text-sky-600"
+            class="mt-2 w-full rounded-lg border-2 border-white/20 bg-violet-950/60 px-3 py-1 tracking-wider text-purple-200 transition-all duration-300 hover:border-gray-400 hover:text-gray-100 hover:active:border-sky-600 hover:active:bg-transparent hover:active:text-sky-600"
           >
             Full Info
           </button>
