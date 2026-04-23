@@ -1,33 +1,83 @@
 @import "tailwindcss";
+@import "swiper/css/bundle";
 
 body {
-    background: #143e46;
-    /* background: #31cfeebb; */
+  background: #143e46;
+  /* background: #31cfeebb; */
 }
 
 .banner1 {
-    left: 0;
+  left: 0;
 }
 .banner2 {
-    right: 0;
+  right: 0;
 }
 .banner3 {
-    left: 19.5%;
+  left: 19.5%;
 }
 .banner4 {
-    left: 60.5%;
+  left: 60.5%;
 }
 .banner5 {
-    left: 40%;
-    right: 40%;
-    transform: scaleX(1.1);
+  left: 40%;
+  right: 40%;
+  transform: scaleX(1.1);
 }
 
-.banner1, .banner2, .banner3, .banner4, .banner5 {
-    filter: grayscale(1);
-    opacity: .1;
-    position: fixed;
-    top: 0;
-    width: 20%;
-    z-index: -1;
+.banner1,
+.banner2,
+.banner3,
+.banner4,
+.banner5 {
+  filter: grayscale(1);
+  opacity: 0.1;
+  position: fixed;
+  top: 0;
+  width: 20%;
+  z-index: -1;
+}
+
+.carousel-mask {
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 2%,
+      black 7%,
+      black 85%,
+      transparent 98%
+    ),
+    linear-gradient(to top, transparent 2%, black 25%);
+
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 2%,
+      black 7%,
+      black 85%,
+      transparent 98%
+    ),
+    linear-gradient(to top, transparent 2%, black 25%);
+
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #143e46;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0c88c2;
+  border-radius: 999px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0c88c2 #143e46;
 }
