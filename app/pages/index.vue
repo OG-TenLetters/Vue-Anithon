@@ -1,11 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AnimeCarousel from '~/components/Pages/HomePage/AnimeCarousel.vue';
+
+</script>
 
 <template>
-    <div class="pt-30">
-        <div class="px-20">
-            <div class="m-auto bg-amber-300 w-full max-w-60">
-                <h1>How does this look</h1>
-            </div>
-        </div>
+  <div class="pt-20">
+    <AnimeCarousel />
+    <div class="flex flex-col gap-y-4 px-10">
+      <div
+        class="flex h-80 w-full items-center justify-center rounded-3xl bg-black text-white"
+      >
+        <h1>Yes</h1>
+      </div>
+      <div
+        class="flex h-80 w-full items-center justify-center rounded-3xl bg-black text-white"
+      >
+        <h1>Yes</h1>
+      </div>
+      <div
+        class="flex h-80 w-full items-center justify-center rounded-3xl bg-black text-white"
+      >
+        <h1>Yes</h1>
+      </div>
     </div>
+  </div>
 </template>
