@@ -73,6 +73,8 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 <template>
   <div class="carousel-mask relative px-6">
     <div>
+
+      <!-- CAROUSEL Controls -->
       <div
         class="absolute right-40 bottom-6 z-20 flex items-center rounded-xl bg-[#0b2125] px-4 py-2"
       >
@@ -83,6 +85,7 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
           />
         </button>
 
+        <!-- CAROUSEL Pagination -->
         <div class="pb-1 text-xl font-semibold text-white">
           {{ currentIndex + 1 }} / {{ totalSlides }}
         </div>
@@ -95,8 +98,12 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
         </button>
       </div>
     </div>
-    
-    <div v-if="!animeData.length" class="h-80 bg-[#0b2429] animate-pulse rounded-xl"></div>
+
+    <!-- CAROUSEL Banner Skeleton -->
+    <div
+      v-if="!animeData.length"
+      class="h-80 animate-pulse rounded-xl bg-[#0b2429]"
+    ></div>
 
     <Swiper
       v-if="animeData.length"
@@ -123,12 +130,15 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
             class="absolute inset-0 bg-linear-to-r from-[#143e46]/20 via-black/20 to-transparent"
           ></div>
 
+          <!-- CAROUSEL__InfoCard -->
           <div
             class="relative z-10 flex flex-col gap-y-1 rounded-r-2xl bg-sky-950/85 py-6 pr-12 pl-16"
           >
             <h1 class="text-3xl font-bold">
               {{ anime.title ?? anime.title_english ?? anime.title_japanese }}
             </h1>
+
+            <!-- CAROUSEL__InfoCard--Box1 -->
             <div class="flex w-fit items-center gap-x-2 rounded-lg py-0.5">
               <h2
                 class="flex items-center gap-x-1 rounded-lg border-2 border-sky-400 bg-sky-900 p-1 text-[8px] font-semibold text-sky-400"
@@ -155,9 +165,13 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
                 <span v-if="i !== (anime.genres?.length ?? 0) - 1">,</span>
               </h2>
             </div>
+
+            <!-- CAROUSEL__InfoCard--Description -->
             <h2 class="line-clamp-2 max-w-120 pt-2 text-xs">
               {{ anime.synopsis }}
             </h2>
+
+            <!-- CAROUSEL__InfoCard--Box2 -->
             <div
               class="flex w-fit rounded-xl border-2 border-white/40 bg-black/90 px-4 py-1 text-xs"
             >
@@ -178,6 +192,8 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
                 <h3>N/A</h3>
               </div>
             </div>
+
+            <!-- CAROUSEL__InfoCard--AddToListBox -->
             <div class="flex items-center gap-x-2">
               <button
                 @click="tempAddToListToggle"

@@ -20,7 +20,7 @@ const handleProfileClick = () => {
 
 <template>
   <div
-    class="fixed top-0 z-50 m-auto flex w-full max-w-480 items-center justify-between gap-x-2 rounded-b-lg border-b border-white/10 bg-linear-to-b from-sky-700/70 to-sky-900/50 px-6 py-5 shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm"
+    class="fixed top-0 left-1/2 -translate-x-1/2  z-50 m-auto flex w-full max-w-480 items-center justify-between gap-x-2 rounded-b-lg border-b border-white/10 bg-linear-to-b from-sky-700/70 to-sky-900/50 px-6 py-5 shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm"
   >
     <NuxtLink to="/">
       <AnithonLogo
