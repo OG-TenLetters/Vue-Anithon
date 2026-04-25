@@ -29,7 +29,7 @@ const handleProfileClick = () => {
     </NuxtLink>
     <div class="relative">
       <input
-        class="flex w-140 items-center gap-x-2 rounded-md bg-white px-4 py-2 pl-8 inset-shadow-sm ring-sky-950/50 inset-shadow-neutral-500 outline-none focus:ring-3"
+        class="flex w-140 items-center gap-x-2 rounded-md placeholder:text-gray-600 bg-[#c9cdd3] px-4 py-2 pl-8 inset-shadow-sm ring-sky-950/50 inset-shadow-neutral-500 outline-none focus:ring-3"
         name="search"
         id="search"
         placeholder="Search..."

@@ -15,7 +15,7 @@ const toggleTab = () => {
   >
     <!-- TRENDING__Header -->
     <div
-      class="absolute top-0 z-10 flex w-full justify-between rounded-2xl bg-linear-to-br from-violet-950/70 to-sky-950/70 px-9 py-3 text-center shadow shadow-sky-300/30 backdrop-blur-sm"
+      class="absolute top-0 z-5 flex w-full justify-between rounded-2xl bg-linear-to-br from-violet-950/70 to-sky-950/70 px-9 py-3 text-center shadow shadow-sky-300/30 backdrop-blur-sm"
     >
       <h1 class="flex items-center gap-x-4 text-3xl">
         <div
@@ -40,7 +40,7 @@ const toggleTab = () => {
         </div>
       </div>
     </div>
-    <div class="flex max-h-123 flex-col gap-y-2 overflow-y-scroll p-9 pt-24">
+    <div class="flex max-h-147 flex-col gap-y-2 overflow-y-scroll p-9 pt-24">
       <!-- TRENDING__TrendCard -->
       <TrendCard :count="i + 1" v-for="(_, i) in 10" />
     </div>

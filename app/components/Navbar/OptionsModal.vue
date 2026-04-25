@@ -54,7 +54,7 @@ const items2 = [
     ></div>
     <h1 class="transition-all duration-150 hover:text-neutral-200">{{ name }}</h1>
     <ul
-    class="invisible absolute top-8 left-3/7 z-10 grid w-full min-w-max gap-y-1.5 rounded-2xl bg-gray-800 p-6 font-normal text-gray-200  capitalize opacity-0 transition-all duration-150 group-hover:visible group-hover:top-6 group-hover:opacity-100"
+    class="invisible absolute top-8 left-3/7 z-10 grid w-full min-w-max gap-y-1.5 rounded-2xl bg-[#031825] p-6 font-normal text-gray-200  capitalize opacity-0 transition-all duration-150 group-hover:visible group-hover:top-6 group-hover:opacity-100"
     :class="name === 'Type' ? 'grid-cols-1 pr-4' : 'grid-cols-4 pr-14'"
     >
       <li

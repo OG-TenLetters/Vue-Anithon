@@ -73,7 +73,6 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 <template>
   <div class="carousel-mask relative px-6">
     <div>
-
       <!-- CAROUSEL Controls -->
       <div
         class="absolute right-40 bottom-6 z-20 flex items-center rounded-xl bg-[#0b2125] px-4 py-2"
@@ -132,7 +131,7 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 
           <!-- CAROUSEL__InfoCard -->
           <div
-            class="relative z-10 flex flex-col gap-y-1 rounded-r-2xl bg-sky-950/85 py-6 pr-12 pl-16"
+            class="relative z-10 flex flex-col gap-y-1 rounded-r-2xl bg-sky-950/85 py-6 pr-12 pl-19"
           >
             <h1 class="text-3xl font-bold">
               {{ anime.title ?? anime.title_english ?? anime.title_japanese }}
