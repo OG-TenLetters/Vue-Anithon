@@ -20,14 +20,14 @@ const close = () => {
       <div
         @mouseenter="open"
         @mouseleave="close"
-        class="pointer-events-none absolute top-8 right-5 z-5 flex rounded-full bg-white opacity-0 transition-all duration-150 group-hover:pointer-events-auto group-hover:-translate-y-3 group-hover:opacity-100 hover:scale-110"
+        class="pointer-events-none absolute top-8 right-3 z-6 flex rounded-full bg-white opacity-0 transition-all duration-150 group-hover:pointer-events-auto group-hover:-translate-y-3 group-hover:opacity-100 hover:scale-110"
       >
         <Icon class="bg-blue-950 text-2xl" name="mingcute:information-fill" />
 
         <!-- ANIMECARD__Hover-Popup -->
         <div
           v-if="show"
-          class="absolute -top-3 -right-65 mt-2 w-72 rounded-xl border-white/10 bg-linear-to-b from-sky-950/85 to-purple-950/80 px-8 py-5 text-white shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm"
+          class="absolute z-1 -top-3 -right-65 mt-2 w-72 rounded-xl border-white/10 bg-linear-to-b from-sky-950/85 to-purple-950/80 px-8 py-5 text-white shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm"
         >
         <div class="border bg-white flex items-center justify-center overflow-hidden rounded-full absolute top-1 left-1">
         <Icon class=" bg-blue-950 text-2xl" name="mingcute:information-fill" />
@@ -72,7 +72,7 @@ const close = () => {
         </div>
       </div>
       <figure
-        class="max-w-40 overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80"
+        class="overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80"
       >
         <img
           class="h-[110%] w-[110%] object-cover"

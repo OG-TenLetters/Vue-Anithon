@@ -62,6 +62,25 @@ body {
   mask-composite: intersect;
 }
 
+/* .container-mask {
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0.1%,
+      black 1%,
+      black 99%,
+      transparent 99.9%
+    );
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0.1%,
+      black 1%,
+      black 99%,
+      transparent 99.9%
+    );
+} */
+
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 8px;

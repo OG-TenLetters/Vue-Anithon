@@ -7,6 +7,7 @@ const activeModal = ref<ModalType | null>(null);
 const setModal = (modal: ModalType | null) => {
   activeModal.value = modal;
 };
+
 </script>
 
 <template>
@@ -17,4 +18,6 @@ const setModal = (modal: ModalType | null) => {
     @close="setModal(null)"
   />
   <slot />
+  <Footer />
+
 </template>
