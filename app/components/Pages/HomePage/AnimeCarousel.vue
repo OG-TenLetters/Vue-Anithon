@@ -42,7 +42,7 @@ const animeData = ref<Anime[]>([]);
 onMounted(async () => {
   const res: any = await getAnime();
   animeData.value = res.data;
-  console.log(res.data);
+  // console.log(res.data);
 });
 
 import { Swiper, SwiperSlide } from "swiper/vue";

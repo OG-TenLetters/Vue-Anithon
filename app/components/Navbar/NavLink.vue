@@ -21,7 +21,7 @@ const LinkAppend = () => {
 <template>
   <h1
     @click="LinkAppend"
-    class="cursor-pointer transition-all duration-150"
+    class="cursor-pointer h-fit transition-all duration-150"
   >
     {{ name }}
   </h1>
