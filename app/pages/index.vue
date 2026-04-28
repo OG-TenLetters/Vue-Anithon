@@ -3,9 +3,9 @@ import AnimeCarousel from "~/components/Pages/HomePage/AnimeCarousel.vue";
 </script>
 
 <template>
-  <div class="m-auto max-w-480 pt-20">
+  <div class="m-auto max-w-480 max-sm:pt-16 pt-20">
     <AnimeCarousel />
-    <div class="flex flex-col gap-y-4 px-10 pb-8">
+    <div class="flex flex-col gap-y-4 px-10 max-sm:-pt-4 pb-8">
       <div
         class="flex h-full w-full justify-center gap-x-2 rounded-3xl pb-7  bg-[#1c0d35]/90 text-white"
       >

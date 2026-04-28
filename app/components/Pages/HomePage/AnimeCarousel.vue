@@ -71,28 +71,28 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 </script>
 
 <template>
-  <div class="carousel-mask relative px-6">
+  <div class="carousel-mask relative px-6 max-md:px-0">
     <div>
       <!-- CAROUSEL Controls -->
       <div
-        class="absolute right-40 bottom-6 z-20 flex items-center rounded-xl bg-[#0b2125] px-4 py-2"
+        class="absolute right-40 bottom-6 z-20 flex items-center rounded-xl bg-[#0b2125] px-4 py-2 max-lg:right-20 max-md:right-12 max-sm:right-2"
       >
         <button @click="swiperRef?.slidePrev()" class="">
           <Icon
             name="mingcute:left-line"
-            class="cursor-pointer text-4xl text-gray-300 transition-all duration-150 hover:scale-110 hover:text-white"
+            class="cursor-pointer text-4xl text-gray-300 transition-all duration-150 hover:scale-110 hover:text-white max-lg:text-2xl"
           />
         </button>
 
         <!-- CAROUSEL Pagination -->
-        <div class="pb-1 text-xl font-semibold text-white">
+        <div class="pb-1 text-xl font-semibold text-white max-lg:text-sm">
           {{ currentIndex + 1 }} / {{ totalSlides }}
         </div>
 
         <button @click="swiperRef?.slideNext()" class="">
           <Icon
             name="mingcute:right-line"
-            class="cursor-pointer text-4xl text-gray-300 transition-all duration-150 hover:scale-110 hover:text-white"
+            class="cursor-pointer text-4xl text-gray-300 transition-all duration-150 hover:scale-110 hover:text-white max-lg:text-2xl"
           />
         </button>
       </div>
@@ -131,14 +131,16 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 
           <!-- CAROUSEL__InfoCard -->
           <div
-            class="relative z-10 flex flex-col gap-y-1 rounded-r-2xl bg-sky-950/85 py-6 pr-12 pl-19"
+            class="relative z-10 flex flex-col gap-y-1 max-sm:w-full max-sm:translate-y-8 rounded-r-2xl bg-sky-950/85 max-sm:bg-linear-180 max-sm:from-sky-950/10 max-sm:to-black/40 py-6 pr-12 pl-19 max-xl:pl-14 max-md:px-8"
           >
-            <h1 class="text-3xl font-bold">
+            <h1 class="text-3xl font-bold max-md:text-2xl">
               {{ anime.title ?? anime.title_english ?? anime.title_japanese }}
             </h1>
 
             <!-- CAROUSEL__InfoCard--Box1 -->
-            <div class="flex w-fit items-center gap-x-2 rounded-lg py-0.5">
+            <div
+              class="flex w-fit items-center gap-x-2 rounded-lg py-0.5 max-md:gap-x-1"
+            >
               <h2
                 class="flex items-center gap-x-1 rounded-lg border-2 border-sky-400 bg-sky-900 p-1 text-[8px] font-semibold text-sky-400"
               >
@@ -172,38 +174,40 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 
             <!-- CAROUSEL__InfoCard--Box2 -->
             <div
-              class="flex w-fit rounded-xl border-2 border-white/40 bg-black/90 px-4 py-1 text-xs"
+              class="flex w-fit rounded-xl border-2 border-white/40 bg-black/90 px-4 py-1 text-xs max-md:px-1"
             >
               <div
-                class="flex flex-col items-center border-r-2 border-white/40 px-6"
+                class="flex flex-col items-center border-r-2 border-white/40 px-6 max-md:px-2"
               >
                 <h3>Rating</h3>
-                <h3>{{ anime.rating }}</h3>
+                <h3 class="max-md:text-[10px]">{{ anime.rating }}</h3>
               </div>
-              <div class="flex flex-col items-center px-6">
+              <div class="flex flex-col items-center px-6 max-md:px-2">
                 <h3>Release</h3>
-                <h3>{{ anime.aired?.string }}</h3>
+                <h3 class="max-md:text-[10px]">{{ anime.aired?.string }}</h3>
               </div>
               <div
-                class="flex flex-col items-center border-l-2 border-white/40 px-6"
+                class="flex flex-col items-center border-l-2 border-white/40 px-6 max-md:px-2"
               >
                 <h3>Quality</h3>
-                <h3>N/A</h3>
+                <h3 class="max-md:text-[10px]">N/A</h3>
               </div>
             </div>
 
             <!-- CAROUSEL__InfoCard--AddToListBox -->
-            <div class="flex items-center gap-x-2">
+            <div class="flex items-center gap-x-2 max-sm:justify-between">
               <button
                 @click="tempAddToListToggle"
-                class="mt-2 w-fit rounded-xl border border-purple-200 bg-purple-900 px-4 py-2 text-white"
+                class="mt-2 w-fit rounded-xl border flex  items-center border-purple-200 bg-purple-900 px-4 py-2 text-white max-sm:rounded-lg max-sm:px-2 max-sm:py-2"
               >
                 <Icon name="mingcute:add-fill" />
-                Add To List
+                <h3 class="max-sm:text-sm">
+                  Add To List
+                </h3>
               </button>
               <div class="group relative">
                 <Icon
-                  class="mt-3 text-3xl text-amber-300 transition-all duration-300 hover:text-amber-400"
+                  class="mt-3 text-3xl text-amber-300 max-sm:mr-24 transition-all duration-300 hover:text-amber-400"
                   name="mingcute:star-fill"
                 />
                 <div
