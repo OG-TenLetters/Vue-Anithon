@@ -9,7 +9,7 @@ const emit = defineEmits(["set-modal", "close"]);
     <div v-if="activeModal">
       <div class="fixed top-0 right-0 bottom-0 left-0 z-20 bg-black/40"></div>
       <div
-        class="fixed top-1/2 left-1/2 z-30 -translate-1/2 overflow-hidden rounded-3xl bg-linear-to-b from-sky-700/70 to-sky-900/50 bg-gray-950/77 backdrop-blur-xs p-10 inset-shadow-[0px_0px_8px_2px] inset-shadow-sky-500/30"
+        class="fixed top-1/2 left-1/2 z-30 -translate-1/2 overflow-hidden rounded-3xl bg-gray-950/77 bg-linear-to-b from-sky-700/70 to-sky-900/50 p-10 inset-shadow-[0px_0px_8px_2px] inset-shadow-sky-500/30 backdrop-blur-xs max-md:min-w-80 max-sm:min-w-69 max-sm:p-5"
       >
         <Icon
           @click="emit('close')"
@@ -17,41 +17,49 @@ const emit = defineEmits(["set-modal", "close"]);
           name="mingcute:xrp-line"
         />
         <div
-          class="absolute -top-25 left-1/2 h-50 w-50 -translate-x-1/2 rotate-45 bg-sky-700/50"
+          class="pointer-events-none absolute -top-25 left-1/2 h-50 w-50 -translate-x-1/2 rotate-45 bg-sky-700/50 max-sm:-top-35"
         ></div>
         <div
-          class="absolute -bottom-40 left-1/2 h-50 w-50 -translate-x-1/2 rotate-45 bg-sky-700/50"
+          class="pointer-events-none absolute -bottom-40 left-1/2 h-50 w-50 -translate-x-1/2 rotate-45 bg-sky-700/50 max-sm:-bottom-50"
         ></div>
         <div
-          class="absolute top-5/9 -right-42 h-50 w-50 -translate-y-1/2 rotate-45 bg-sky-700/50"
+          class="pointer-events-none absolute top-5/9 -right-42 h-50 w-50 -translate-y-1/2 rotate-45 bg-sky-700/50 max-sm:top-8/15 max-sm:-right-50"
         ></div>
         <div
-          class="absolute top-4/9 -left-42 h-50 w-50 -translate-y-1/2 rotate-45 bg-sky-700/50"
+          class="pointer-events-none absolute top-4/9 -left-42 h-50 w-50 -translate-y-1/2 rotate-45 bg-sky-700/50 max-sm:top-6/15 max-sm:-left-50"
         ></div>
         <div class="flex items-center justify-center">
-          <figure class="max-w-20 rotate-45 rounded-sm bg-sky-950/70">
-            <img src="/anime-logo.png" class="h-20 w-20 -rotate-45" alt="" />
+          <figure
+            class="max-w-20 rotate-45 rounded-sm bg-sky-950/70 max-sm:max-w-15"
+          >
+            <img
+              src="/anime-logo.png"
+              class="max-sm:x-15 s h-20 w-20 -rotate-45 max-sm:h-15"
+              alt=""
+            />
           </figure>
         </div>
 
         <form
           v-if="activeModal === 'signin'"
-          class="flex flex-col items-center gap-y-4 rounded-2xl border-2 border-sky-500/40 p-10 text-white"
+          class="flex flex-col items-center gap-y-4 rounded-2xl border-2 border-sky-500/40 p-10 text-white max-sm:p-5"
           action=""
         >
-          <h1 class="mb-3 text-2xl font-bold">Sign in to your Account</h1>
+          <h1 class="mb-3 text-center text-2xl font-bold max-sm:text-lg">
+            Sign in to your Account
+          </h1>
           <input
-            class="xl:w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white max-sm:text-sm"
             type="text"
             placeholder="Email or Username"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white max-sm:text-sm"
             type="password"
             placeholder="Password"
           />
           <button
-            class="mt-2 w-full cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-600 px-4 py-2 font-bold tracking-wider transition-all duration-150 hover:border-sky-500 hover:bg-sky-500 active:border-sky-600 active:bg-transparent active:text-sky-600"
+            class="mt-2 w-full cursor-pointer rounded-xl border-2 max-sm:text-sm border-sky-600 bg-sky-600 px-4 py-2 font-bold tracking-wider transition-all duration-150 hover:border-sky-500 hover:bg-sky-500 active:border-sky-600 active:bg-transparent active:text-sky-600"
           >
             Sign In
           </button>
@@ -76,29 +84,31 @@ const emit = defineEmits(["set-modal", "close"]);
           class="flex flex-col items-center gap-y-4 rounded-2xl border-2 border-sky-500/40 p-10 text-white"
           action=""
         >
-          <h1 class="mb-3 text-2xl font-bold">Make an Account</h1>
+          <h1 class="mb-3 text-center text-2xl font-bold max-sm:text-lg">
+            Make an Account
+          </h1>
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white max-sm:text-sm"
             type="text"
             placeholder="Username"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white max-sm:text-sm"
             type="email"
             placeholder="Email"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white max-sm:text-sm"
             type="password"
             placeholder="Password"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white max-sm:text-sm"
             type="password"
             placeholder="Confirm Password"
           />
           <button
-            class="mt-2 w-full cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-600 px-4 py-2 font-bold tracking-wider transition-all duration-150 hover:border-sky-500 hover:bg-sky-500 active:border-sky-600 active:bg-transparent active:text-sky-600"
+            class="mt-2 w-full cursor-pointer rounded-xl border-2 max-sm:text-sm border-sky-600 bg-sky-600 px-4 py-2 font-bold tracking-wider transition-all duration-150 hover:border-sky-500 hover:bg-sky-500 active:border-sky-600 active:bg-transparent active:text-sky-600"
           >
             Create
           </button>
@@ -118,14 +128,16 @@ const emit = defineEmits(["set-modal", "close"]);
           class="flex flex-col items-center gap-y-4 rounded-2xl border-2 border-sky-500/40 p-10 text-white"
           action=""
         >
-          <h1 class="mb-3 text-2xl font-bold">Forgot Password</h1>
+          <h1 class="mb-3 text-center text-2xl font-bold max-sm:text-lg">
+            Forgot Password
+          </h1>
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white max-sm:text-sm"
             type="email"
             placeholder="Email"
           />
           <button
-            class="mt-2 w-full cursor-pointer rounded-xl border-2 border-sky-600 bg-sky-600 px-4 py-2 font-bold tracking-wider transition-all duration-150 hover:border-sky-500 hover:bg-sky-500 active:border-sky-600 active:bg-transparent active:text-sky-600"
+            class="mt-2 w-full cursor-pointer rounded-xl border-2 max-sm:text-sm border-sky-600 bg-sky-600 px-4 py-2 font-bold tracking-wider transition-all duration-150 hover:border-sky-500 hover:bg-sky-500 active:border-sky-600 active:bg-transparent active:text-sky-600"
           >
             Request
           </button>

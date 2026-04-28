@@ -8,9 +8,14 @@ import ThemeToggle from "./ThemeToggle.vue";
 const isProfileModalOpen = ref(false);
 const emit = defineEmits(["open-modal"]);
 const isSignedIn = ref(true); // REPLACE LATER
+const isMobileSearchbarOpen = ref(false);
 
 const toggleSignIn = () => {
   isSignedIn.value = !isSignedIn.value;
+};
+
+const toggleMobileSearchbar = () => {
+  isMobileSearchbarOpen.value = !isMobileSearchbarOpen.value;
 };
 
 const handleProfileClick = () => {
@@ -23,6 +28,32 @@ const handleProfileClick = () => {
 </script>
 
 <template>
+  <!-- MOBILE__Search--Bar -->
+  <div
+    :class="
+      isMobileSearchbarOpen
+        ? 'translate-y-0 scale-y-100 opacity-100'
+        : '-translate-y-6 scale-y-0 opacity-0'
+    "
+    class="fixed top-17 left-1/2 z-45 block w-9/10 min-w-40 -translate-x-1/2 rounded-b-2xl border-4 border-t-0 border-sky-700/90 transition-all duration-300"
+  >
+    <input
+      class="flex w-full items-center gap-x-2 rounded-b-md bg-[#c9cdd3c9] px-4 py-2 pl-8 inset-shadow-sm ring-sky-950/50 inset-shadow-neutral-500 outline-none placeholder:text-gray-600 focus:ring-3 max-sm:py-1 max-sm:pl-6"
+      name="search"
+      id="search"
+      placeholder="Search..."
+    />
+    <Icon
+      class="absolute top-1/2 left-2 -translate-y-4/9 text-xl text-blue-950 max-sm:left-1"
+      name="mingcute:search-3-line"
+    />
+    <button
+      class="absolute top-1/2 right-2 flex -translate-y-1/2 cursor-pointer items-center p-4 font-semibold text-blue-950 uppercase hover:brightness-170 max-sm:px-1 max-sm:text-sm"
+    >
+      <Icon name="mingcute:filter-fill" />
+      Filter
+    </button>
+  </div>
   <div
     class="fixed top-0 left-1/2 z-50 m-auto flex w-full max-w-480 -translate-x-1/2 items-center justify-between gap-x-4 rounded-b-lg border-b border-white/10 bg-linear-to-b from-sky-700/70 to-sky-900/50 px-6 py-5 shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm max-xl:pl-12"
   >
@@ -53,12 +84,11 @@ const handleProfileClick = () => {
 
     <!--MOBILE__Search--Button -->
     <button
-      class="mr-auto hidden items-center justify-center rounded-lg border border-white/60 bg-violet-900 px-5 py-1 text-white max-[478px]:flex"
+      @click="toggleMobileSearchbar"
+      class="mr-auto hidden items-center justify-center rounded-lg border-2 border-white/60 bg-violet-900 py-1 text-white transition-all duration-150 active:border-violet-900 active:bg-white/40 active:text-violet-900 max-[478px]:flex max-sm:px-3"
     >
       <Icon name="mingcute:search-3-line" />
     </button>
-    <!-- MOBILE__Search--Bar -->
-
     <!-- CATEGORIES -->
     <div
       class="max-2xl:text-md mx-3 flex min-w-140 gap-x-5 font-semibold text-white uppercase max-xl:hidden max-xl:text-sm"
@@ -108,6 +138,7 @@ const handleProfileClick = () => {
       <LanguageToggle class="block max-md:hidden" />
       <!-- Enable Later -->
 
+      <!-- SIGNIN__Toggle -->
       <div
         @click="toggleSignIn"
         :class="isSignedIn ? 'bg-green-600' : 'bg-red-600'"
