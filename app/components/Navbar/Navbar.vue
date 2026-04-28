@@ -53,7 +53,7 @@ const handleProfileClick = () => {
 
     <!--MOBILE__Search--Button -->
     <button
-      class="mr-auto hidden items-center justify-center rounded-lg border border-white/60 bg-violet-900 max-sm:px-3  py-1 text-white max-[478px]:flex"
+      class="mr-auto hidden items-center justify-center rounded-lg border border-white/60 bg-violet-900 py-1 text-white max-[478px]:flex max-sm:px-3"
     >
       <Icon name="mingcute:search-3-line" />
     </button>

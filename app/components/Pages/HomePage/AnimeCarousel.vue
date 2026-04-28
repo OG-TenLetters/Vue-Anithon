@@ -131,7 +131,7 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 
           <!-- CAROUSEL__InfoCard -->
           <div
-            class="relative z-10 flex flex-col gap-y-1 max-sm:w-full max-sm:translate-y-8 rounded-r-2xl bg-sky-950/85 max-sm:bg-linear-180 max-sm:from-sky-950/10 max-sm:to-black/40 py-6 pr-12 pl-19 max-xl:pl-14 max-md:px-8"
+            class="relative z-10 flex flex-col gap-y-1 rounded-r-2xl bg-sky-950/85 py-6 pr-12 pl-19 max-xl:pl-14 max-md:px-8 max-sm:w-full max-sm:translate-y-8 max-sm:bg-linear-180 max-sm:from-sky-950/10 max-sm:to-black/40"
           >
             <h1 class="text-3xl font-bold max-md:text-2xl">
               {{ anime.title ?? anime.title_english ?? anime.title_japanese }}
@@ -198,16 +198,14 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
             <div class="flex items-center gap-x-2 max-sm:justify-between">
               <button
                 @click="tempAddToListToggle"
-                class="mt-2 w-fit rounded-xl border flex  items-center border-purple-200 bg-purple-900 px-4 py-2 text-white max-sm:rounded-lg max-sm:px-2 max-sm:py-2"
+                class="mt-2 flex w-fit items-center rounded-xl border border-purple-200 bg-purple-900 px-4 py-2 text-white max-sm:rounded-lg max-sm:px-2 max-sm:py-2"
               >
                 <Icon name="mingcute:add-fill" />
-                <h3 class="max-sm:text-sm">
-                  Add To List
-                </h3>
+                <h3 class="max-sm:text-sm">Add To List</h3>
               </button>
               <div class="group relative">
                 <Icon
-                  class="mt-3 text-3xl text-amber-300 max-sm:mr-24 transition-all duration-300 hover:text-amber-400"
+                  class="mt-3 text-3xl text-amber-300 transition-all duration-300 hover:text-amber-400 max-sm:mr-24"
                   name="mingcute:star-fill"
                 />
                 <div

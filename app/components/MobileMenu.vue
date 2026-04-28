@@ -23,7 +23,7 @@ const toggleDropdown = (key: string) => {
     />
     <div
       :class="isMobileMenuOpen ? 'opacity-100' : 'opacity-0'"
-      class="absolute left-15 max-md:left-11 transition-all duration-900"
+      class="absolute left-15 transition-all duration-900 max-md:left-11"
     >
       <AnithonLogo bgColor="bg-sky-800/80" />
     </div>
@@ -34,10 +34,10 @@ const toggleDropdown = (key: string) => {
         ? 'max-w-90 opacity-100'
         : 'pointer-events-none max-w-0 -translate-x-6 text-transparent opacity-0'
     "
-    class="fixed top-0 left-0 z-20 h-screen w-full max-md:w-54 rounded-r-3xl bg-gray-800/98 pt-16 pr-6 pb-10 text-white inset-shadow-[-2px_0px_4px_2px] inset-shadow-sky-500/40 transition-all duration-300"
+    class="fixed top-0 left-0 z-20 h-screen w-full rounded-r-3xl bg-gray-800/98 pt-16 pr-6 pb-10 text-white inset-shadow-[-2px_0px_4px_2px] inset-shadow-sky-500/40 transition-all duration-300 max-md:w-54"
   >
     <div class="h-full rounded-r-2xl border-2 border-l-0 border-sky-500/40">
-      <ul class="w-full text-xl max-md:text-sm font-semibold">
+      <ul class="w-full text-xl font-semibold max-md:text-sm">
         <!-- GENRES__Dropdown -->
         <li
           class="rounded-tr-xl transition-colors duration-150"

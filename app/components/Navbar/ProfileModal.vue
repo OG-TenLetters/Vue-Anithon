@@ -1,15 +1,13 @@
 <script setup lang="ts">
-
-defineProps<{ isOpen: boolean }>()
-const emit = defineEmits(["toggle"])
-
+defineProps<{ isOpen: boolean }>();
+const emit = defineEmits(["toggle"]);
 </script>
 
 <template>
   <div @click="emit('toggle')" class="relative">
     <figure
       :class="isOpen ? 'rotate-0' : 'rotate-45'"
-      class="h-9 w-9 max-[478px]:h-6 max-[478px]:w-6 cursor-pointer overflow-hidden rounded-xs bg-amber-300 transition-all duration-300 hover:brightness-90"
+      class="h-9 w-9 cursor-pointer overflow-hidden rounded-xs bg-amber-300 transition-all duration-300 hover:brightness-90 max-[478px]:h-6 max-[478px]:w-6"
     >
       <img
         :class="isOpen ? 'rotate-0' : '-rotate-45'"
@@ -28,11 +26,15 @@ const emit = defineEmits(["toggle"])
     >
       <div class="rounded-xl rounded-tr-none border-2 border-sky-500/40">
         <li
-          class="max-md:flex hidden cursor-pointer items-center gap-x-2 px-6 py-3 transition-all duration-150 first:rounded-tl-xl hover:bg-sky-700/30 hover:text-sky-300"
+          class="hidden cursor-pointer items-center gap-x-2 px-6 py-3 transition-all duration-150 first:rounded-tl-xl hover:bg-sky-700/30 hover:text-sky-300 max-md:flex"
+        >
+          <span class="-mr-1 text-green-500/70">En</span>/<span class="-ml-1"
+            >Jp</span
           >
-          <span class="text-green-500/70 -mr-1">En</span>/<span class="-ml-1">Jp</span> 
-          <div class="flex items-center justify-start transition-all duration-150 w-6 h-4 bg-gray-600 rounded-full border border-white">
-            <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+          <div
+            class="flex h-4 w-6 items-center justify-start rounded-full border border-white bg-gray-600 transition-all duration-150"
+          >
+            <div class="h-3 w-3 rounded-full bg-green-500/70"></div>
           </div>
         </li>
         <li

@@ -9,7 +9,7 @@ const emit = defineEmits(["set-modal", "close"]);
     <div v-if="activeModal">
       <div class="fixed top-0 right-0 bottom-0 left-0 z-20 bg-black/40"></div>
       <div
-        class="fixed top-1/2 left-1/2 z-30 -translate-1/2 overflow-hidden rounded-3xl bg-linear-to-b from-sky-700/70 to-sky-900/50 bg-gray-950/77 backdrop-blur-xs p-10 inset-shadow-[0px_0px_8px_2px] inset-shadow-sky-500/30"
+        class="fixed top-1/2 left-1/2 z-30 -translate-1/2 overflow-hidden rounded-3xl bg-gray-950/77 bg-linear-to-b from-sky-700/70 to-sky-900/50 p-10 inset-shadow-[0px_0px_8px_2px] inset-shadow-sky-500/30 backdrop-blur-xs"
       >
         <Icon
           @click="emit('close')"
@@ -41,12 +41,12 @@ const emit = defineEmits(["set-modal", "close"]);
         >
           <h1 class="mb-3 text-2xl font-bold">Sign in to your Account</h1>
           <input
-            class="xl:w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white xl:w-full"
             type="text"
             placeholder="Email or Username"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white"
             type="password"
             placeholder="Password"
           />
@@ -78,22 +78,22 @@ const emit = defineEmits(["set-modal", "close"]);
         >
           <h1 class="mb-3 text-2xl font-bold">Make an Account</h1>
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white"
             type="text"
             placeholder="Username"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white"
             type="email"
             placeholder="Email"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white"
             type="password"
             placeholder="Password"
           />
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white"
             type="password"
             placeholder="Confirm Password"
           />
@@ -120,7 +120,7 @@ const emit = defineEmits(["set-modal", "close"]);
         >
           <h1 class="mb-3 text-2xl font-bold">Forgot Password</h1>
           <input
-            class="w-full rounded-lg bg-gray-300 text-gray-800 px-2 py-1 ring-1 ring-transparent outline-none focus:ring-white"
+            class="w-full rounded-lg bg-gray-300 px-2 py-1 text-gray-800 ring-1 ring-transparent outline-none focus:ring-white"
             type="email"
             placeholder="Email"
           />
