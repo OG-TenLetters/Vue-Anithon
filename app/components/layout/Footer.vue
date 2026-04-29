@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AnithonLogo from '../ui/AnithonLogo.vue';
+
 const alphabet = Array.from({ length: 26 }, (_, i) =>
   String.fromCharCode(97 + i),
 );
@@ -44,7 +46,9 @@ const alphabet = Array.from({ length: 26 }, (_, i) =>
           <Icon name="mingcute:copyright-line" /> Copyright of Jadon Smith * All
           Rights Reserved
         </h2>
-        <AnithonLogo class="ml-2" bgColor="bg-blue-950" />
+        <NuxtLink to="/">
+          <AnithonLogo class="ml-2" bgColor="bg-blue-950" />
+        </NuxtLink>
       </div>
     </div>
   </div>

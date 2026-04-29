@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import Navbar from "~/components/Navbar/Navbar.vue";
-import SigninSignupModal from "~/components/SigninSignupModal.vue";
+
+import Footer from '~/components/layout/Footer.vue';
+import Navbar from '~/components/layout/Navbar/Navbar.vue';
+import SigninSignupModal from '~/components/ui/modals/SigninSignupModal.vue';
 
 type ModalType = "signin" | "signup" | "forgot-password";
 const activeModal = ref<ModalType | null>(null);

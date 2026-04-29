@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import TopChatBubble from './TopChatBubble.vue';
+
+</script>
+
 <template>
   <div
     class="relative flex items-center justify-center rounded-2xl bg-gray-900/60 shadow shadow-sky-400/20"
