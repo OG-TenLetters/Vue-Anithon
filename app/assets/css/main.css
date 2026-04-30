@@ -100,3 +100,45 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #0c88c2 #143e46;
 }
+
+@keyframes shimmer {
+  0%   { background-position: -400% 0; }
+  100% { background-position: 400% 0; }
+}
+
+.skeleton1 {
+  animation: shimmer 6s linear infinite;
+  background: linear-gradient(
+    90deg,
+    #2e0c69 0%,
+    #452a74 35%,
+    #6032ac 50%,
+    #452a74 65%,
+    #2e0c69 100%
+  );
+  background-size: 400% 100%;
+}
+.skeleton2 {
+  animation: shimmer 6s linear infinite reverse;
+  background: linear-gradient(
+    90deg,
+    #092549 0%,
+    #1f3b55 35%,
+    #144866 50%,
+    #1f3b55 65%,
+    #092549 100%
+  );
+  background-size: 400% 100%;
+}
+.skeleton3 {
+  animation: shimmer 6s linear infinite;
+  background: linear-gradient(
+    90deg,
+    #0c3469 0%,
+    #2d5172 35%,
+    #205a7c 50%,
+    #2d5172 65%,
+    #0c3469 100%
+  );
+  background-size: 400% 100%;
+}

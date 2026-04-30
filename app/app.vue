@@ -1,3 +1,8 @@
+<script setup lang="ts">
+
+
+</script>
+
 <template>
   <div class="banner__container">
     <img class="banner1" src="/CompleteBanner.svg">

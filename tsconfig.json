@@ -16,6 +16,7 @@
     }
   ],
   "compilerOptions": {
+    "types": ["node"],
     "moduleResolution": "bundler",
   },
 }

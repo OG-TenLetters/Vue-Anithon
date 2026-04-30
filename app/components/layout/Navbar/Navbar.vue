@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import AnithonLogo from "~/components/ui/AnithonLogo.vue";
 import LanguageToggle from "./LanguageToggle.vue";
 import NavLink from "./NavLink.vue";
 import OptionsModal from "./OptionsModal.vue";
 import ProfileModal from "./ProfileModal.vue";
 import ThemeToggle from "./ThemeToggle.vue";
+import MobileMenu from "~/components/ui/modals/MobileMenu.vue";
 
 const isProfileModalOpen = ref(false);
 const emit = defineEmits(["open-modal"]);
@@ -58,16 +60,17 @@ const handleProfileClick = () => {
     class="fixed top-0 left-1/2 z-50 m-auto flex w-full max-w-480 -translate-x-1/2 items-center justify-between gap-x-4 rounded-b-lg border-b border-white/10 bg-linear-to-b from-sky-700/70 to-sky-900/50 px-6 py-5 shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm max-xl:pl-12"
   >
     <MobileMenu />
-    <AnithonLogo
-      bgColor="bg-blue-950"
-      class="mr-6 ml-8 cursor-pointer transition-all duration-150 hover:brightness-90 max-md:mx-4 max-sm:mr-0"
-    />
+    <NuxtLink to="/">
+      <AnithonLogo
+        bgColor="bg-blue-950"
+        class="mr-6 ml-8 cursor-pointer transition-all duration-150 hover:brightness-90 max-md:mx-4 max-sm:mr-0"
+      />
+    </NuxtLink>
     <!-- SEARCHBAR -->
     <div class="relative block w-full min-w-40 max-[478px]:hidden">
       <input
         class="flex w-full items-center gap-x-2 rounded-md bg-[#c9cdd3] px-4 py-2 pl-8 inset-shadow-sm ring-sky-950/50 inset-shadow-neutral-500 outline-none placeholder:text-gray-600 focus:ring-3 max-sm:py-1 max-sm:pl-6"
         name="search"
-        id="search"
         placeholder="Search..."
       />
       <Icon

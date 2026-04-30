@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AnithonLogo from '../AnithonLogo.vue';
+
 const isMobileMenuOpen = ref(false);
 const activeDropdown = ref<string | null>(null);
 

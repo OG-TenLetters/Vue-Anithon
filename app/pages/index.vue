@@ -1,5 +1,64 @@
 <script setup lang="ts">
-import AnimeCarousel from "~/components/Pages/HomePage/AnimeCarousel.vue";
+import TrendingAnime from "~/components/anime/TrendingAnime.vue";
+import AnimeCarousel from "./index/AnimeCarousel.vue";
+import TrendingChat from "~/components/chat/TrendingChat.vue";
+import Divider from "~/components/ui/Divider.vue";
+import ShareBox from "~/components/ui/ShareBox.vue";
+import { useAnime } from "#imports";
+
+const {
+  getAnime,
+  getTopAnime,
+  getGenreAnime,
+  getRecommendedAnime,
+  getAnimeById,
+  getSearchAnime,
+} = useAnime();
+// const source = ref<"all" | "top" | "genre" | "recommended" | "id" | "search">(
+//   "all",
+// );
+const searchQuery = ref<string>("");
+
+const { data: allAnime, pending: allAnimePending } = await useAsyncData(
+  "allAnime",
+  () => getAnime(),
+  { server: false },
+);
+const { data: topAnime, pending: topAnimePending } = await useAsyncData(
+  "topAnime",
+  () => getTopAnime(),
+  { server: false },
+);
+const { data: recommendedAnime, pending: recommendedAnimePending } =
+  await useAsyncData("recommendedAnime", () =>  getRecommendedAnime(), {
+    server: false,
+  });
+
+console.log("My Recommended:", recommendedAnime.value);
+console.log("Is Pending Even Working?:", allAnimePending.value);
+
+// const load = async () => {
+//   switch (source.value) {
+//     case "top":
+//       animeData.value = await getTopAnime();
+//       break;
+//     case "genre":
+//       animeData.value = await getGenreAnime("action");
+//       break;
+//     case "recommended":
+//       animeData.value = await getRecommendedAnime();
+//     case "id":
+//       animeData.value = await getAnimeById(5);
+//       break;
+//     case "search":
+//       animeData.value = await getSearchAnime(searchQuery.value);
+//       break;
+//     default:
+//       animeData.value = await getAnime();
+//   }
+// };
+
+// onMounted(load)
 </script>
 
 <template>
@@ -14,17 +73,34 @@ import AnimeCarousel from "~/components/Pages/HomePage/AnimeCarousel.vue";
           <ShareBox />
 
           <!-- ANIMECARD__Containers -->
-          <AnimeCardContainer header="Currently Watching" :count="6" />
+          <AnimeCardContainer
+            :pending="null"
+            :anime-data="null"
+            header="Currently Watching"
+            :count="0"
+          />
           <Divider class="opacity-30" />
-          <AnimeCardContainer header="Latest Updates" :count="12" />
+          <AnimeCardContainer
+            :pending="allAnimePending"
+            :anime-data="allAnime"
+            header="Latest Updates"
+            :count="12"
+          />
           <Divider class="opacity-30" />
-          <AnimeCardContainer header="Recommended" :count="6" />
+          <AnimeCardContainer
+            :pending="recommendedAnimePending"
+            :anime-data="recommendedAnime"
+            header="Recommended"
+            :count="6"
+          />
         </div>
         <div
           class="max-2xl:4/11 mr-7 ml-12 flex w-3/11 max-w-100 flex-col justify-start gap-y-9 max-lg:hidden"
         >
           <!-- TRENDING__Box -->
-          <TrendingAnime />
+          <TrendingAnime 
+          :pending="topAnimePending"
+          :anime-data="topAnime" />
           <TrendingChat />
         </div>
       </div>
