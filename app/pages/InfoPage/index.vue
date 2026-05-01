@@ -242,6 +242,7 @@ const setInfoDropdown = (newInfoDropdown: typeof infoDropdown.value) => {
               </div>
             </div>
           </div>
+          <!-- Recommendations -->
           <AnimeCardContainer
             :count="6"
             header="Recommendations"
