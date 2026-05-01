@@ -7,7 +7,7 @@ type Props = {
   pending: boolean | null;
 };
 
-const Props = defineProps<Props>()
+const Props = defineProps<Props>();
 
 const isTabOpen = ref(false);
 
@@ -74,20 +74,20 @@ const toggleTab = () => {
     <div
       class="flex max-h-147 flex-col gap-y-2 overflow-y-scroll p-9 pt-24 max-2xl:max-h-117 max-2xl:px-5 max-2xl:pt-19"
     >
-    <!-- TRENDING__TrendCardSkeleton -->
-    <TrendCardSkeleton
-    v-if="!animeData || pending"
-     v-for="(_, i) in 10"
-     :key="i"
-     />
+      <!-- TRENDING__TrendCardSkeleton -->
+      <TrendCardSkeleton
+        v-if="!animeData || pending"
+        v-for="(_, i) in 10"
+        :key="i"
+      />
       <!-- TRENDING__TrendCard -->
       <TrendCard
-      v-else"
-      v-for="(anime, i) in animeData ?? []"
-      :key="anime.mal_id"
-      :anime="anime"
-      :count="Number(i)" />
-          
+        v-else
+        v-for="(anime, i) in animeData ?? []"
+        :key="anime.mal_id"
+        :anime="anime"
+        :count="Number(i)"
+      />
     </div>
   </div>
 </template>

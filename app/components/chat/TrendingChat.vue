@@ -21,17 +21,17 @@ import TopChatBubble from './TopChatBubble.vue';
         </div>
         Top Chats
       </h1>
-      <div
-        class="relative w-fit rounded border border-violet-400/60 bg-violet-950 px-4 py-1 inset-shadow-sm hover:brightness-110 max-xl:text-xs"
+      <button
+        class="relative w-fit rounded border border-violet-400/60 bg-violet-950 px-4 py-1 inset-shadow-sm transition duration-300 active:translate-y-1 hover:brightness-110 max-xl:text-xs"
       >
         View All
-      </div>
+      </button>
     </div>
     <div
       class="flex max-h-200 flex-col gap-y-4 overflow-y-scroll p-9 pt-24 max-2xl:max-h-190 max-2xl:px-5 max-2xl:pt-19 max-xl:max-h-156"
     >
       <!-- TRENDCHATS__Chat-bubble -->
-      <TopChatBubble v-for="(_, i) in 4" />
+      <TopChatBubble v-for="(_, i) in 4" :key="i" />
     </div>
   </div>
 </template>

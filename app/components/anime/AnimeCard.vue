@@ -72,7 +72,7 @@ const close = () => {
           </button>
         </div>
 
-        <NuxtLink :to="`/InfoPage/${anime.id}`">
+        <NuxtLink :to="`/InfoPage`">
           <button
             class="mt-2 w-full rounded-lg border-2 border-white/20 bg-violet-950/60 px-3 py-1 tracking-wider text-purple-200 transition-all duration-300 hover:border-gray-400 hover:text-gray-100 hover:active:border-sky-600 hover:active:bg-transparent hover:active:text-sky-600"
           >
@@ -82,7 +82,7 @@ const close = () => {
       </div>
     </div>
 
-    <NuxtLink :to="`/InfoPage/${anime.id}`">
+    <NuxtLink :to="`/InfoPage`">
       <!-- ANIMECARD__Image -->
       <figure
         class="flex items-center justify-center aspect-7/11 overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80 max-2xl:rounded-xl"

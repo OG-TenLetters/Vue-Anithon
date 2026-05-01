@@ -30,7 +30,7 @@ const { data: topAnime, pending: topAnimePending } = await useAsyncData(
   { server: false },
 );
 const { data: recommendedAnime, pending: recommendedAnimePending } =
-  await useAsyncData("recommendedAnime", () =>  getRecommendedAnime(), {
+  await useAsyncData("recommendedAnime", () => getRecommendedAnime(), {
     server: false,
   });
 
@@ -98,9 +98,7 @@ console.log("Is Pending Even Working?:", allAnimePending.value);
           class="max-2xl:4/11 mr-7 ml-12 flex w-3/11 max-w-100 flex-col justify-start gap-y-9 max-lg:hidden"
         >
           <!-- TRENDING__Box -->
-          <TrendingAnime 
-          :pending="topAnimePending"
-          :anime-data="topAnime" />
+          <TrendingAnime :pending="topAnimePending" :anime-data="topAnime" />
           <TrendingChat />
         </div>
       </div>

@@ -37,7 +37,7 @@ const handleProfileClick = () => {
         ? 'translate-y-0 scale-y-100 opacity-100'
         : '-translate-y-6 scale-y-0 opacity-0'
     "
-    class="fixed top-17 left-1/2 z-45 block w-9/10 min-w-40 -translate-x-1/2 rounded-b-2xl border-4 border-t-0 border-sky-700/90 transition-all duration-300"
+    class="fixed top-17 left-1/2 z-45 block w-9/10 min-w-40 -translate-x-1/2 rounded-b-2xl border-4 border-t-0 border-sky-700/90 transition-all duration-300 select-none"
   >
     <input
       class="flex w-full items-center gap-x-2 rounded-b-md bg-[#c9cdd3c9] px-4 py-2 pl-8 inset-shadow-sm ring-sky-950/50 inset-shadow-neutral-500 outline-none placeholder:text-gray-600 focus:ring-3 max-sm:py-1 max-sm:pl-6"
@@ -57,7 +57,7 @@ const handleProfileClick = () => {
     </button>
   </div>
   <div
-    class="fixed top-0 left-1/2 z-50 m-auto flex w-full max-w-480 -translate-x-1/2 items-center justify-between gap-x-4 rounded-b-lg border-b border-white/10 bg-linear-to-b from-sky-700/70 to-sky-900/50 px-6 py-5 shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm max-xl:pl-12"
+    class="fixed top-0 left-1/2 z-50 m-auto flex w-full max-w-480 -translate-x-1/2 items-center justify-between gap-x-4 rounded-b-lg border-b border-white/10 bg-linear-to-b from-sky-700/70 to-sky-900/50 px-6 py-5 shadow-lg inset-shadow-[0px_-1px_4px_2px] shadow-black/20 inset-shadow-sky-600/90 backdrop-blur-sm select-none max-xl:pl-12"
   >
     <MobileMenu />
     <NuxtLink to="/">

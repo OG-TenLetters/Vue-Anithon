@@ -101,9 +101,30 @@ body {
   scrollbar-color: #0c88c2 #143e46;
 }
 
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.6s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
+
+.dropdown-enter-to,
+.dropdown-leave-from {
+  max-height: 1000px;
+  opacity: 1;
+}
+
 @keyframes shimmer {
-  0%   { background-position: -400% 0; }
-  100% { background-position: 400% 0; }
+  0% {
+    background-position: -400% 0;
+  }
+  100% {
+    background-position: 400% 0;
+  }
 }
 
 .skeleton1 {
