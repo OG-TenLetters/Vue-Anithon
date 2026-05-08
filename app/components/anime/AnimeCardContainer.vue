@@ -28,7 +28,7 @@ const props = defineProps<Props>();
         v-else
         class="w-1/7 max-md:w-1/4 max-sm:w-1/3"
         v-for="anime in (animeData ?? []).slice(0, count)"
-        :key="anime.mal_id"
+        :key="anime.id"
         :anime="anime"
       />
     </div>

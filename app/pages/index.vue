@@ -5,19 +5,30 @@ import TrendingChat from "~/components/chat/TrendingChat.vue";
 import Divider from "~/components/ui/Divider.vue";
 import ShareBox from "~/components/ui/ShareBox.vue";
 import { useAnime } from "#imports";
+import { useAnimeFromAnilist } from "~/composables/useAnimeFromAnilist"
 
 const {
-  getAnime,
+  // getAnime,
   getTopAnime,
   getGenreAnime,
   getRecommendedAnime,
   getAnimeById,
   getSearchAnime,
 } = useAnime();
+
+const {
+  getAnime,
+} = useAnimeFromAnilist();
 // const source = ref<"all" | "top" | "genre" | "recommended" | "id" | "search">(
 //   "all",
 // );
+
+
 const searchQuery = ref<string>("");
+
+  onMounted(() => {
+  useAnimeFromAnilist()
+})
 
 const { data: allAnime, pending: allAnimePending } = await useAsyncData(
   "allAnime",
@@ -34,8 +45,6 @@ const { data: recommendedAnime, pending: recommendedAnimePending } =
     server: false,
   });
 
-console.log("My Recommended:", recommendedAnime.value);
-console.log("Is Pending Even Working?:", allAnimePending.value);
 
 // const load = async () => {
 //   switch (source.value) {

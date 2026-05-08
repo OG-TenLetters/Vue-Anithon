@@ -12,10 +12,13 @@ function goBack() {
   }
 }
 
-const infoDropdown = ref<"episodes" | "characters" | "staff">("episodes");
+type InfoSection = "episodes" | "characters" | "staff"
 
-const setInfoDropdown = (newInfoDropdown: typeof infoDropdown.value) => {
-  infoDropdown.value = newInfoDropdown;
+const infoDropdown = ref< InfoSection | null>(null);
+
+
+const setInfoDropdown = (value: InfoSection) => {
+  infoDropdown.value = infoDropdown.value === value ? null : value;
   console.log(infoDropdown.value);
 };
 </script>
@@ -190,19 +193,27 @@ const setInfoDropdown = (newInfoDropdown: typeof infoDropdown.value) => {
                         <div class="flex justify-between px-20">
                           <!-- Season Button -->
                           <div
-                            class="flex cursor-pointer justify-center rounded-lg bg-gray-800 px-3 py-1.5 text-2xl transition-all duration-150 hover:text-sky-400"
+                            class="flex cursor-pointer justify-center rounded-lg bg-sky-950/80 px-3 py-1.5 text-2xl transition-all duration-150 hover:text-sky-400"
                           >
                             <div class="flex items-center gap-x-2">
-                              <Icon name="mingcute:down-fill" />
+                              <div
+                                class="flex rotate-270 items-center justify-center"
+                              >
+                                <Icon name="mingcute:down-fill" />
+                              </div>
                               <h3>Season 1</h3>
                             </div>
                           </div>
                           <!-- Episodes Button -->
                           <div
-                            class="flex cursor-pointer justify-center rounded-lg bg-gray-800 px-3 py-4 text-2xl transition-all duration-150 hover:text-sky-400"
+                            class="flex cursor-pointer justify-center rounded-lg bg-sky-950/80 px-3 py-4 text-2xl transition-all duration-150 hover:text-sky-400"
                           >
                             <div class="flex items-center gap-x-2">
-                              <Icon name="mingcute:down-fill" />
+                              <div
+                                class="flex rotate-270 items-center justify-center"
+                              >
+                                <Icon name="mingcute:down-fill" />
+                              </div>
                               <h3>001 - 050</h3>
                             </div>
                           </div>
@@ -213,7 +224,7 @@ const setInfoDropdown = (newInfoDropdown: typeof infoDropdown.value) => {
                           <div
                             v-for="(_, i) in 50"
                             :key="i"
-                            class="flex cursor-pointer justify-center rounded-lg bg-gray-700 px-3 py-1.5 text-2xl inset-shadow-[0px_0px_8px_1px] inset-shadow-sky-400/50 hover:bg-sky-950/80 hover:inset-shadow-white"
+                            class="flex cursor-pointer justify-center rounded-lg bg-neutral-800/20 px-3 py-1.5 text-2xl inset-shadow-[0px_0px_8px_1px] inset-shadow-sky-400/50 hover:bg-sky-950/80 hover:inset-shadow-white"
                           >
                             {{ i + 1 }}
                           </div>

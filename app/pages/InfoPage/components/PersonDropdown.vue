@@ -1,7 +1,7 @@
 <script setup lang="ts">
 type Props = {
   dropdownTitle: string;
-  infoDropdown: string;
+  infoDropdown: string | null;
   setInfoDropdown: any | null;
   dropdownType: string;
 };

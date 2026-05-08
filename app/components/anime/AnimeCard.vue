@@ -37,17 +37,17 @@ const close = () => {
         >
           <Icon class="bg-blue-950 text-2xl" name="mingcute:information-fill" />
         </div>
-        <h3 class="font-bold">{{ anime.title }}</h3>
+        <h3 class="font-bold">{{ anime.title.english || anime.title.native }}</h3>
 
         <p class="line-clamp-3 text-xs text-gray-300">
-          {{ anime.synopsis }}
+          {{ anime.description }}
         </p>
 
         <div class="flex items-center justify-between">
           <div class="my-2 w-4/5 text-xs text-white">
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Aired:</h3>
-              <h3>{{ anime.aired }}</h3>
+              <h3>{{ anime.startDate.year }}</h3>
             </div>
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Status:</h3>
@@ -87,14 +87,14 @@ const close = () => {
       <figure
         class="flex items-center justify-center aspect-7/11 overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80 max-2xl:rounded-xl"
       >
-        <img class="h-full w-full scale-105" :src="anime.images.medium" alt="" />
+        <img class="h-full w-full scale-105" :src="anime.coverImage?.large" alt="" />
       </figure>
       <div class="flex flex-col">
         <!-- ANIMECARD__Title -->
         <h3
           class="max-w-40 py-2 text-sm font-semibold transition-all duration-300 group-hover:-translate-y-2 hover:text-gray-400 max-h-8 overflow-hidden  max-2xl:line-clamp-1 max-2xl:text-xs"
         >
-          {{ anime.title }}
+          {{ anime.title.english || anime.title.native }}
         </h3>
         <!-- ANIMECARD__InfoBox -->
         <div
@@ -115,7 +115,7 @@ const close = () => {
               <span class="font-bold max-md:font-normal">CC</span>N/A
             </h2>
           </div>
-          <h4 class="font-semibold">{{ anime.type }}</h4>
+          <h4 class="font-semibold">{{ null }}</h4>
         </div>
       </div>
     </NuxtLink>
