@@ -61,7 +61,7 @@ const close = () => {
             </div>
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Genres:</h3>
-              <h3>{{ anime.genres.join(", ") }}</h3>
+              <h3>{{ anime.genres.join(', ') }}</h3>
             </div>
           </div>
 
