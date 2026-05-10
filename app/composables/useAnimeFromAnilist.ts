@@ -14,6 +14,10 @@ import type {
   AnimeInfoResponse,
   AnimeBaseResponse,
   AnimeInfoQuery,
+  AnimeCardQuery,
+  AnimeCarouselQuery,
+  AnimeTopQuery,
+  PageMedia,
 } from "~/types/graphql";
 
 export const useAnimeFromAnilist = () => {
@@ -26,33 +30,34 @@ export const useAnimeFromAnilist = () => {
       },
     });
   };
+  const extractMedia = <T>(res: GraphQLResponse<PageMedia<T>>) => {
+    return res.data.Page.media;
+  };
 
-  const mapAnimeTop = (a: any): AnimeTop => {
+  const mapAnimeTop = (a: AnimeTopResponse): AnimeTop => {
     const title = {
-      native: a.title?.native ?? null,
-      english: a.title?.english ?? null,
-      romaji: a.title?.romaji ?? null,
+      native: a.title?.native ?? "",
+      english: a.title?.english ?? "",
+      romaji: a.title?.romaji ?? "",
     };
     const coverImage = {
-      medium: a.coverImage?.medium ?? null,
-      large: a.coverImage?.large ?? null,
-      extraLarge: a.coverImage?.extraLarge ?? null,
+      medium: a.coverImage?.medium ?? "",
+      large: a.coverImage?.large ?? "",
+      extraLarge: a.coverImage?.extraLarge ?? "",
     };
 
     return {
       id: a.id ?? 0,
       idMal: a.idMal ?? 0,
       title,
-      format: a.format ?? null,
-      episodes: a.episodes ?? null,
+      format: a.format ?? "",
+      episodes: a.episodes ?? 0,
       coverImage,
     };
   };
-
   const mapAnimeBase = (a: AnimeBaseResponse): AnimeBase => {
     const stripHtml = (html: string | null) =>
       html?.replace(/<[^>]*>/g, "") ?? "";
-
     const title = {
       native: a.title?.native ?? "",
       english: a.title?.english ?? "",
@@ -83,12 +88,11 @@ export const useAnimeFromAnilist = () => {
       endDate,
     };
   };
-
-  const mapAnime = (a: any): Anime => {
+  const mapAnime = (a: AnimeCardResponse): Anime => {
     const coverImage = {
-      medium: a.coverImage?.medium ?? null,
-      large: a.coverImage?.large ?? null,
-      extraLarge: a.coverImage?.extraLarge ?? null,
+      medium: a.coverImage?.medium ?? "",
+      large: a.coverImage?.large ?? "",
+      extraLarge: a.coverImage?.extraLarge ?? "",
     };
 
     return {
@@ -96,15 +100,13 @@ export const useAnimeFromAnilist = () => {
       coverImage,
     };
   };
-
-  const mapAnimeCarousel = (a: any): AnimeCarousel => {
+  const mapAnimeCarousel = (a: AnimeCarouselResponse): AnimeCarousel => {
     return {
       ...mapAnimeBase(a),
-      bannerImage: a.bannerImage ?? null,
-      averageScore: a.averageScore ?? null,
+      bannerImage: a.bannerImage ?? "",
+      averageScore: a.averageScore ?? 0,
     };
   };
-
   const mapAnimeInfo = (a: AnimeInfoResponse): AnimeInfo => {
     const coverImage = {
       medium: a.coverImage?.medium ?? "",
@@ -158,7 +160,7 @@ export const useAnimeFromAnilist = () => {
     id: number,
     idMal: number,
   ): Promise<AnimeInfo> => {
-    const query = `
+    const fullQuery = `
     query InfoCard {
     Media(type: ANIME, id:${id}, idMal:${idMal}) {
       id
@@ -240,14 +242,12 @@ export const useAnimeFromAnilist = () => {
     }
 }
     `;
-    const res = await anilist<AnimeInfoQuery>(query);
-    const mapped = mapAnimeInfo(res.data.Media);
-
-    return mapped;
+    const fetchAnimeInfo = () => anilist<AnimeInfoQuery>(fullQuery);
+    const res = await fetchAnimeInfo();
+    return mapAnimeInfo(res.data.Media);
   };
-
   const getAnime = async (perPage: number, page: number): Promise<Anime[]> => {
-    const query = `
+    const generalQuery = `
     query GeneralAnime {
   Page(perPage: ${perPage}, page: ${page}) {
     media(type: ANIME, sort: [POPULARITY_DESC]) {
@@ -285,15 +285,15 @@ export const useAnimeFromAnilist = () => {
   }
 }
     `;
-    const res = await anilist<AnimeCardResponse>(query);
-    return res.data.Page.media.map(mapAnime);
+    const fetchAnime = () => anilist<AnimeCardQuery>(generalQuery);
+    const res = await fetchAnime();
+    return extractMedia(res).map(mapAnime);
   };
-
   const getCarouselAnime = async (
     perPage: number,
     page: number,
   ): Promise<AnimeCarousel[]> => {
-    const query = `
+    const carouselQuery = `
     query {
   
   Page(perPage: ${perPage}, page: ${page}) {
@@ -323,15 +323,15 @@ export const useAnimeFromAnilist = () => {
   }
 }
     `;
-    const res = await anilist<AnimeCarouselResponse>(query);
-    return res.data.Page.media.map(mapAnimeCarousel);
+    const fetchCarouselAnime = () => anilist<AnimeCarouselQuery>(carouselQuery);
+    const res = await fetchCarouselAnime();
+    return extractMedia(res).map(mapAnimeCarousel);
   };
-
   const getTopAnime = async (
     perPage: number,
     page: number,
   ): Promise<AnimeTop[]> => {
-    const query = `
+    const topQuery = `
     query topAnime {
   Page (perPage: ${perPage}, page: ${page}) {
   media(type: ANIME, sort: [TRENDING_DESC]) {
@@ -355,8 +355,9 @@ export const useAnimeFromAnilist = () => {
   }
 }
     `;
-    const res = await anilist<AnimeTopResponse>(query);
-    return res.data.Page.media.map(mapAnimeTop);
+    const fetchTopAnime = () => anilist<AnimeTopQuery>(topQuery);
+    const res = await fetchTopAnime();
+    return extractMedia(res).map(mapAnimeTop);
   };
 
   return {

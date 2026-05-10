@@ -7,6 +7,7 @@ type Props = {
   header: string | null;
   animeData: Anime[] | null;
   pending: boolean | null;
+  justifyWhere: string | null;
 };
 const props = defineProps<Props>();
 </script>
@@ -15,13 +16,16 @@ const props = defineProps<Props>();
   <div class="w-full px-8 py-6 max-2xl:px-2 max-md:py-3">
     <h2 class="mb-3 text-xl uppercase max-md:ml-6 max-sm:mb-0">{{ header }}</h2>
 
-    <div class="flex flex-wrap justify-center gap-x-6 max-2xl:gap-x-2">
+    <div
+      :class="`justify-${justifyWhere}`"
+      class="flex flex-wrap gap-x-6 px-4 max-2xl:gap-x-2"
+    >
       <!-- ANIME CARD SKELETON -->
       <AnimeCardSkeleton
         v-if="!animeData || pending"
         v-for="(_, i) in count"
         :key="i"
-        class="max-md:1/4 max-sm:1/3 w-1/7"
+        class="w-1/7 max-md:w-1/4 max-sm:w-1/3"
       />
 
       <!-- ANIME CARD -->

@@ -7,8 +7,6 @@ import ShareBox from "~/components/ui/ShareBox.vue";
 import { useAnimeFromAnilist } from "~/composables/useAnimeFromAnilist";
 import type { Anime, AnimeCarousel, AnimeTop } from "~/types/animeFromAnilist";
 
-
-
 const { getAnime, getCarouselAnime, getTopAnime } = useAnimeFromAnilist();
 // const source = ref<"all" | "top" | "genre" | "recommended" | "id" | "search">(
 //   "all",
@@ -16,50 +14,32 @@ const { getAnime, getCarouselAnime, getTopAnime } = useAnimeFromAnilist();
 
 const searchQuery = ref<string>("");
 
-const { data: popularAnime, pending: popularAnimePending } = useAsyncData<AnimeCarousel[]>(
-  "popularAnime",
-  () => getCarouselAnime(10, 1)
-);
+const animeId = ref<[number, number]>([0, 0]);
+
+
+const { data: popularAnime, pending: popularAnimePending } = useAsyncData<
+  AnimeCarousel[]
+>("popularAnime", () => getCarouselAnime(10, 1));
 const { data: allAnime, pending: allAnimePending } = useAsyncData<Anime[]>(
   "allAnime",
   () => getAnime(12, 3),
 );
+const { data: currentAnime, pending: currentAnimePending } = useAsyncData<
+  Anime[]
+>("currentAnime", () => getAnime(3, 1));
+const { data: recommendedAnime, pending: recommendedAnimePending } =
+  useAsyncData<Anime[]>("recommendedAnime", () => getAnime(6, 3));
 const { data: topAnime, pending: topAnimePending } = useAsyncData<AnimeTop[]>(
   "topAnime",
   () => getTopAnime(10, 1),
 );
-const { data: recommendedAnime, pending: recommendedAnimePending } = useAsyncData<Anime[]>(
-  "recommendedAnime",
-   () => getAnime(6, 3),
-);
+
 
 const safePopularAnime = computed(() => popularAnime.value ?? []);
 const safeAllAnime = computed(() => allAnime.value ?? []);
+const safeCurrentAnime = computed(() => currentAnime.value ?? []);
 const safeRecommendedAnime = computed(() => recommendedAnime.value ?? []);
 const safeTopAnime = computed(() => topAnime.value ?? []);
-
-// const load = async () => {
-//   switch (source.value) {
-//     case "top":
-//       animeData.value = await getTopAnime();
-//       break;
-//     case "genre":
-//       animeData.value = await getGenreAnime("action");
-//       break;
-//     case "recommended":
-//       animeData.value = await getRecommendedAnime();
-//     case "id":
-//       animeData.value = await getAnimeById(5);
-//       break;
-//     case "search":
-//       animeData.value = await getSearchAnime(searchQuery.value);
-//       break;
-//     default:
-//       animeData.value = await getAnime();
-//   }
-// };
-
-// onMounted(load)
 </script>
 
 <template>
@@ -78,14 +58,16 @@ const safeTopAnime = computed(() => topAnime.value ?? []);
 
           <!-- ANIMECARD__Containers -->
           <AnimeCardContainer
-            :pending="null"
-            :anime-data="safeRecommendedAnime"
+            :pending="currentAnimePending"
+            justify-where="center"
+            :anime-data="safeCurrentAnime"
             header="Currently Watching"
             :count="3"
           />
           <Divider class="opacity-30" />
           <AnimeCardContainer
             :pending="allAnimePending"
+            justify-where="center"
             :anime-data="safeAllAnime"
             header="Latest Updates"
             :count="12"
@@ -93,6 +75,7 @@ const safeTopAnime = computed(() => topAnime.value ?? []);
           <Divider class="opacity-30" />
           <AnimeCardContainer
             :pending="recommendedAnimePending"
+            justify-where="center"
             :anime-data="safeRecommendedAnime"
             header="Recommended"
             :count="6"
@@ -102,7 +85,8 @@ const safeTopAnime = computed(() => topAnime.value ?? []);
           class="max-2xl:4/11 mr-7 ml-12 flex w-3/11 max-w-100 flex-col justify-start gap-y-9 max-lg:hidden"
         >
           <!-- TRENDING__Box -->
-          <TrendingAnime :pending="topAnimePending" :anime-data="safeTopAnime" />
+          <TrendingAnime
+          :pending="topAnimePending" :anime-data="safeTopAnime" />
           <TrendingChat />
         </div>
       </div>

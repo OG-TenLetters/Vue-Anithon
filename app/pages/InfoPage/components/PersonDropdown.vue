@@ -12,8 +12,6 @@ type Props = {
 
 const props = defineProps<Props>();
 
-console.log(props.animeCast)
-
 </script>
 
 <template>
@@ -36,14 +34,14 @@ console.log(props.animeCast)
       v-show="infoDropdown === `${dropdownType}`"
       class="-mt-10 overflow-hidden"
     >
-      <!-- InfoCard__Content--Characters -->
+      <!-- InfoCard__Content--Cast -->
       <div
         class="rounded-b-3xl border border-blue-300/50 bg-gray-900 p-28 px-8 pb-20"
       >
-        <!-- CharacterCard__Grid -->
-        <div class="grid grid-cols-7 grid-rows-3 gap-y-8">
-          <!-- CharacterCard -->
-          <div v-for="charCard in animeCast" :key="charCard.name.full" class="flex flex-col items-center">
+        <!-- CastCard__Grid -->
+        <div class="grid grid-cols-7 grid-rows-3 gap-y-8 my-auto">
+          <!-- CastCard -->
+          <div v-for="charCard in animeCast" :key="charCard.name.full" class="flex flex-col text-center items-center">
             <figure class="h-25 w-25 overflow-hidden rounded-2xl">
               <div v-if="!charCard"
                 class="h-full w-full bg-red-800/50 bg-linear-to-r from-green-800/50"
@@ -52,7 +50,7 @@ console.log(props.animeCast)
               v-if="charCard"
               class="w-full object-contain" :src="charCard.image" alt="">
             </figure>
-            <h3>{{ charCard.name.native }}</h3>
+            <!-- <h3>{{ charCard.name.native }}</h3> -->
             <h3>{{ charCard.name.full }}</h3>
           </div>
         </div>

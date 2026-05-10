@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Anime } from '~/types/animeFromAnilist';
+import type { Anime } from "~/types/animeFromAnilist";
 
 type Props = {
   anime: Anime;
@@ -39,9 +39,11 @@ const close = () => {
         >
           <Icon class="bg-blue-950 text-2xl" name="mingcute:information-fill" />
         </div>
-        <h3 class="font-bold">{{ anime.title.english || anime.title.native }}</h3>
+        <h3 class="font-bold">
+          {{ anime.title.english || anime.title.native }}
+        </h3>
 
-        <p class="line-clamp-3 text-xs text-gray-300">
+        <p class="line-clamp-3 text-xs font-semibold text-gray-400">
           {{ anime.description }}
         </p>
 
@@ -63,7 +65,7 @@ const close = () => {
             </div>
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Genres:</h3>
-              <h3>{{ anime.genres.slice(0, 3).join(', ') }}</h3>
+              <h3>{{ anime.genres.slice(0, 3).join(", ") }}</h3>
             </div>
           </div>
 
@@ -74,7 +76,7 @@ const close = () => {
           </button>
         </div>
 
-        <NuxtLink :to="`/InfoPage`">
+        <NuxtLink :to="`/InfoPage/${anime.id}-${anime.idMal}`">
           <button
             class="mt-2 w-full rounded-lg border-2 border-white/20 bg-violet-950/60 px-3 py-1 tracking-wider text-purple-200 transition-all duration-300 hover:border-gray-400 hover:text-gray-100 hover:active:border-sky-600 hover:active:bg-transparent hover:active:text-sky-600"
           >
@@ -84,17 +86,21 @@ const close = () => {
       </div>
     </div>
 
-    <NuxtLink :to="`/InfoPage`">
+    <NuxtLink :to="`/InfoPage/${anime.id}-${anime.idMal}`">
       <!-- ANIMECARD__Image -->
       <figure
-        class="flex items-center justify-center aspect-7/11 overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80 max-2xl:rounded-xl"
+        class="flex aspect-7/11 items-center justify-center overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80 max-2xl:rounded-xl"
       >
-        <img class="h-full w-full scale-105" :src="anime.coverImage?.large" alt="" />
+        <img
+          class="h-full w-full scale-105"
+          :src="anime.coverImage?.large"
+          alt=""
+        />
       </figure>
       <div class="flex flex-col">
         <!-- ANIMECARD__Title -->
         <h3
-          class="max-w-40 py-2 text-sm font-semibold transition-all duration-300 group-hover:-translate-y-2 hover:text-gray-400 max-h-8 overflow-hidden  max-2xl:line-clamp-1 max-2xl:text-xs"
+          class="max-h-8 max-w-40 overflow-hidden py-2 text-sm font-semibold transition-all duration-300 group-hover:-translate-y-2 hover:text-gray-400 max-2xl:line-clamp-1 max-2xl:text-xs"
         >
           {{ anime.title.english || anime.title.native }}
         </h3>

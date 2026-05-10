@@ -16,7 +16,7 @@ type Name = {
 
 export type Person = {
   name: Name;
-  image: string
+  image: string;
 };
 
 type Studio = {
@@ -78,4 +78,3 @@ export type AnimeInfo = AnimeBase & {
   characters: Person[];
   streamingEpisodes: StreamingEpisodes[];
 };
-

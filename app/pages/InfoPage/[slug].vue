@@ -4,13 +4,6 @@ import TrendingChat from "~/components/chat/TrendingChat.vue";
 import PersonDropdown from "./components/PersonDropdown.vue";
 import type { AnimeInfo } from "~/types/animeFromAnilist";
 import { useAnimeFromAnilist } from "~/composables/useAnimeFromAnilist";
-import { start } from "node:repl";
-
-type DateParts = {
-  year: number;
-  month: number;
-  day: number;
-};
 
 const { getByIdAnime } = useAnimeFromAnilist();
 const router = useRouter();
@@ -22,20 +15,10 @@ function goBack() {
     navigateTo("/");
   }
 }
-
-type InfoSection = "episodes" | "characters" | "staff";
-const infoDropdown = ref<InfoSection | null>(null);
-
-const { data: selectedAnime, pending: pendingSelectedAnime } =
-  useAsyncData<AnimeInfo>("animeInfo", () => getByIdAnime(182205, 59970));
-
-const anime = computed(() => selectedAnime.value);
-
-
-
-const setInfoDropdown = (value: InfoSection) => {
-  infoDropdown.value = infoDropdown.value === value ? null : value;
-
+type DateParts = {
+  year: number;
+  month: number;
+  day: number;
 };
 
 const formatDate = (d: DateParts): string => {
@@ -59,6 +42,47 @@ const formateDateRange = (start: DateParts, end: DateParts): string => {
 
   return `${startStr} - ${endStr}`;
 };
+
+const route = useRoute();
+
+const ids = computed(() => {
+  const slug = route.params.slug as string;
+
+  if (!slug) return null;
+  const parts = slug.split("-");
+  if (parts.length !== 2) return null;
+
+  const id = Number(parts[0]);
+  const idMal = Number(parts[1])
+
+  return {id, idMal};
+})
+
+
+
+
+type InfoSection = "episodes" | "characters" | "staff";
+const infoDropdown = ref<InfoSection | null>(null);
+
+const { data: selectedAnime, pending: pendingSelectedAnime } =
+  useAsyncData<AnimeInfo>(
+    () => ids.value ? `animeInfo-${ids.value.id}`: 'anime-null', 
+    () =>  getByIdAnime(ids.value!.id, ids.value!.idMal),
+    {
+      watch: [ids],
+    }
+  );
+
+const anime = computed(() => selectedAnime.value);
+
+
+
+const setInfoDropdown = (value: InfoSection) => {
+  infoDropdown.value = infoDropdown.value === value ? null : value;
+
+};
+
+
 </script>
 
 <template>
@@ -130,7 +154,7 @@ const formateDateRange = (start: DateParts, end: DateParts): string => {
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Synonyms:</h3>
-                    <h3 class="text-white select-text">{{ anime?.synonyms.map(s => s).join(', ') }}</h3>
+                    <h3 class="text-white select-text">{{ anime?.synonyms.map(s => s).join(', ') || "" }}</h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Aired:</h3>
@@ -297,6 +321,7 @@ const formateDateRange = (start: DateParts, end: DateParts): string => {
           <!-- Recommendations -->
           <AnimeCardContainer
             :count="6"
+            justify-where="center"
             header="Recommendations"
             :anime-data="null"
             :pending="false"
@@ -307,7 +332,9 @@ const formateDateRange = (start: DateParts, end: DateParts): string => {
           class="max-2xl:4/11 mr-7 ml-12 flex w-3/11 max-w-100 flex-col justify-start gap-y-9 max-lg:hidden"
         >
           <!-- TRENDING__Anime -->
-          <TrendingAnime :pending="true" :anime-data="null" />
+          <!-- <TrendingAnime
+          v-if="null"
+          :pending="true" :anime-data="null" /> -->
           <!-- TRENDING__Chat -->
           <TrendingChat />
         </div>

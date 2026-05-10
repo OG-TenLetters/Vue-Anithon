@@ -4,7 +4,7 @@ import TrendCardSkeleton from "./anime-skeletons/TrendCardSkeleton.vue";
 import TrendCard from "./TrendCard.vue";
 
 type Props = {
-  animeData: AnimeTop[] | null;
+  animeData: AnimeTop[];
   pending: boolean | null;
 };
 

@@ -10,10 +10,10 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-  <NuxtLink to="/InfoPage">
+  <NuxtLink :to="`/InfoPage/${anime.id}-${anime.idMal}`">
     <div class="group flex items-center">
       <figure
-        class="relative flex aspect-square max-xl:max-w-15 max-xl:min-w-14 max-w-20 min-w-19 items-center justify-center overflow-hidden rounded-2xl border-2 border-purple-950 max-xl:aspect-12/16"
+        class="relative flex aspect-square max-w-20 min-w-19 items-center justify-center overflow-hidden rounded-2xl border-2 border-purple-950 max-xl:aspect-12/16 max-xl:max-w-15 max-xl:min-w-14"
       >
         <img
           class="h-full w-full brightness-75 group-hover:brightness-100"
@@ -21,7 +21,7 @@ const props = defineProps<Props>();
           alt=""
         />
         <div
-          class="absolute top-1/2 left-1/2 z-1 -translate-1/2 max-2xl:text-3xl text-4xl font-bold"
+          class="absolute top-1/2 left-1/2 z-1 -translate-1/2 text-4xl font-bold max-2xl:text-3xl"
         >
           {{ count + 1 }}
         </div>
@@ -32,7 +32,9 @@ const props = defineProps<Props>();
       <div
         class="-ml-6 w-full rounded-r-2xl bg-gray-950 px-6 py-3 pl-10 transition-all duration-150 group-hover:bg-violet-300/10"
       >
-        <h2 class="mb-1 line-clamp-1 max-xl:text-sm">{{ anime.title.english || anime.title.native || anime.title.romaji }}</h2>
+        <h2 class="mb-1 line-clamp-1 max-xl:text-sm">
+          {{ anime.title.english || anime.title.native || anime.title.romaji }}
+        </h2>
         <div class="flex items-start justify-between">
           <div class="flex gap-x-2 text-sm max-xl:gap-x-0">
             <h2
@@ -47,7 +49,9 @@ const props = defineProps<Props>();
               <span class="font-bold">CC</span>{{ anime.episodes || "?" }}
             </h2>
           </div>
-          <h4 class="font-semibold">{{ anime.format === "TV Special" ? "Special" : anime.format}}</h4>
+          <h4 class="font-semibold">
+            {{ anime.format === "TV Special" ? "Special" : anime.format }}
+          </h4>
         </div>
       </div>
     </div>
