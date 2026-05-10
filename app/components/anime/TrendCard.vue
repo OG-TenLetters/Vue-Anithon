@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { AnimeTop } from "~/types/animeFromAnilist";
 import Divider from "../ui/Divider.vue";
 
 type Props = {
-  anime: any | null;
+  anime: AnimeTop;
   count: number;
 };
 const props = defineProps<Props>();
@@ -16,7 +17,7 @@ const props = defineProps<Props>();
       >
         <img
           class="h-full w-full brightness-75 group-hover:brightness-100"
-          :src="anime.images.medium"
+          :src="anime.coverImage.large"
           alt=""
         />
         <div
@@ -31,7 +32,7 @@ const props = defineProps<Props>();
       <div
         class="-ml-6 w-full rounded-r-2xl bg-gray-950 px-6 py-3 pl-10 transition-all duration-150 group-hover:bg-violet-300/10"
       >
-        <h2 class="mb-1 line-clamp-1 max-xl:text-sm">{{ anime.title }}</h2>
+        <h2 class="mb-1 line-clamp-1 max-xl:text-sm">{{ anime.title.english || anime.title.native || anime.title.romaji }}</h2>
         <div class="flex items-start justify-between">
           <div class="flex gap-x-2 text-sm max-xl:gap-x-0">
             <h2
@@ -46,7 +47,7 @@ const props = defineProps<Props>();
               <span class="font-bold">CC</span>{{ anime.episodes || "?" }}
             </h2>
           </div>
-          <h4 class="font-semibold">{{ anime.type === "TV Special" ? "Special" : anime.type}}</h4>
+          <h4 class="font-semibold">{{ anime.format === "TV Special" ? "Special" : anime.format}}</h4>
         </div>
       </div>
     </div>

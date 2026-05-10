@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { Anime } from "~/types/animeFromAnilist";
 import AnimeCardSkeleton from "./anime-skeletons/AnimeCardSkeleton.vue";
 
 type Props = {
   count: number | null;
   header: string | null;
-  animeData: any | null;
+  animeData: Anime[] | null;
   pending: boolean | null;
 };
 const props = defineProps<Props>();
@@ -27,7 +28,7 @@ const props = defineProps<Props>();
       <AnimeCard
         v-else
         class="w-1/7 max-md:w-1/4 max-sm:w-1/3"
-        v-for="anime in (animeData ?? []).slice(0, count)"
+        v-for="anime in animeData"
         :key="anime.id"
         :anime="anime"
       />

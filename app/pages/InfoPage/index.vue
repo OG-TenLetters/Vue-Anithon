@@ -2,6 +2,17 @@
 import TrendingAnime from "~/components/anime/TrendingAnime.vue";
 import TrendingChat from "~/components/chat/TrendingChat.vue";
 import PersonDropdown from "./components/PersonDropdown.vue";
+import type { AnimeInfo } from "~/types/animeFromAnilist";
+import { useAnimeFromAnilist } from "~/composables/useAnimeFromAnilist";
+import { start } from "node:repl";
+
+type DateParts = {
+  year: number;
+  month: number;
+  day: number;
+};
+
+const { getByIdAnime } = useAnimeFromAnilist();
 const router = useRouter();
 
 function goBack() {
@@ -12,14 +23,41 @@ function goBack() {
   }
 }
 
-type InfoSection = "episodes" | "characters" | "staff"
+type InfoSection = "episodes" | "characters" | "staff";
+const infoDropdown = ref<InfoSection | null>(null);
 
-const infoDropdown = ref< InfoSection | null>(null);
+const { data: selectedAnime, pending: pendingSelectedAnime } =
+  useAsyncData<AnimeInfo>("animeInfo", () => getByIdAnime(182205, 59970));
+
+const anime = computed(() => selectedAnime.value);
+
 
 
 const setInfoDropdown = (value: InfoSection) => {
   infoDropdown.value = infoDropdown.value === value ? null : value;
-  console.log(infoDropdown.value);
+
+};
+
+const formatDate = (d: DateParts): string => {
+  if (!d.year || !d.month || !d.day) return "";
+
+  return new Date(d.year, d.month - 1, d.day).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
+
+const formateDateRange = (start: DateParts, end: DateParts): string => {
+  const startStr = formatDate(start);
+
+  if (!end.year) {
+    return `${startStr} - Now`;
+  }
+
+  const endStr = formatDate(end);
+
+  return `${startStr} - ${endStr}`;
 };
 </script>
 
@@ -54,7 +92,7 @@ const setInfoDropdown = (value: InfoSection) => {
             >
               <img
                 class="h-full w-full"
-                src="/anime-card-example.webp"
+                :src="anime?.coverImage.medium"
                 alt=""
               />
             </figure>
@@ -65,58 +103,70 @@ const setInfoDropdown = (value: InfoSection) => {
               <div class="flex w-full justify-center gap-x-12">
                 <!-- InfoCard__Image -->
                 <figure
-                  class="pointer-events-none w-1/3 overflow-hidden rounded-3xl bg-sky-800 shadow-lg shadow-gray-950"
+                  class="pointer-events-none max-h-119 w-2/7 my-auto overflow-hidden rounded-3xl bg-sky-800 shadow-lg shadow-gray-950"
                 >
                   <img
-                    class="h-full w-full rounded-2xl"
-                    src="/anime-card-example.webp"
+                    class="w-full rounded-2xl"
+                    :src="anime?.coverImage.extraLarge"
                     alt=""
                   />
                 </figure>
                 <!-- InfoCard__Details -->
+
                 <ul
-                  class="flex w-1/3 flex-col gap-y-1 rounded-3xl border-2 border-white/50 bg-sky-800/50 p-12 text-lg shadow-lg shadow-gray-950"
+                  class="flex w-5/9 flex-col gap-y-1 rounded-3xl border-2 border-white/50 bg-sky-800/50 p-12 text-lg shadow-lg shadow-gray-950"
                 >
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Japanese:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 class="text-white select-text">
+                      {{ anime?.title.native }}
+                    </h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">English:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 class="text-white select-text">
+                      {{ anime?.title.english }}
+                    </h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Synonyms:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 class="text-white select-text">{{ anime?.synonyms.map(s => s).join(', ') }}</h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Aired:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 v-if="anime" class="text-white select-text">
+                      {{ formateDateRange(anime?.startDate, anime?.endDate) }}
+                    </h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Duration:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 class="text-white select-text">
+                      {{ anime?.duration }}min per episode
+                    </h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Status:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 class="text-white select-text">{{ anime?.status }}</h3>
                   </li>
                   <li class="flex gap-x-2">
-                    <h3 class="font-semibold text-gray-400">MAL Score:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 class="font-semibold text-gray-400">Score:</h3>
+                    <h3 class="text-white select-text">
+                      {{ anime?.averageScore }}
+                    </h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Genres:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 class="text-white select-text">
+                      {{ anime?.genres.map((g) => g).join(", ") }}
+                    </h3>
                   </li>
                   <li class="flex gap-x-2">
                     <h3 class="font-semibold text-gray-400">Studios:</h3>
-                    <h3 class="text-white select-text">Random</h3>
+                    <h3 v-if="anime" class="text-white select-text">
+                      {{ anime.studios.map((s) => s.name).join(", ") }}
+                    </h3>
                   </li>
-                  <li class="flex gap-x-2">
-                    <h3 class="font-semibold text-gray-400">Producers:</h3>
-                    <h3 class="text-white select-text">Random</h3>
-                  </li>
+
                   <!-- InfoCard__Details--AddToListButton -->
                   <button
                     class="mt-8 flex w-fit items-center gap-x-2 rounded-xl border border-purple-200 bg-purple-900 px-4 py-2 text-2xl text-white max-sm:rounded-lg max-sm:px-2 max-sm:py-2"
@@ -125,13 +175,18 @@ const setInfoDropdown = (value: InfoSection) => {
                     <h3 class="max-sm:text-sm">Add To List</h3>
                   </button>
                 </ul>
+                
               </div>
 
               <!-- InfoCard__Title -->
               <h1
                 class="mt-8 mb-4 w-fit rounded-lg py-4 pt-6 text-5xl font-bold tracking-wide select-text"
               >
-                One Piece
+                {{
+                  anime?.title.english ||
+                  anime?.title.romaji ||
+                  anime?.title.native
+                }}
               </h1>
               <!-- InfoCard__Content -->
               <div
@@ -139,27 +194,9 @@ const setInfoDropdown = (value: InfoSection) => {
               >
                 <!-- InfoCard__Content--Description -->
                 <p
-                  class="rounded-2xl bg-gray-900 px-10 py-6 pb-12 text-lg font-semibold tracking-wide text-white/90"
+                  class="rounded-2xl bg-gray-900 px-10 py-6 pb-12 text-center text-lg font-semibold tracking-wide text-white/90"
                 >
-                  Barely surviving in a barrel after passing through a terrible
-                  whirlpool at sea, carefree Monkey D. Luffy ends up aboard a
-                  ship under attack by fearsome pirates. Despite being a
-                  naive-looking teenager, he is not to be underestimated.
-                  Unmatched in battle, Luffy is a pirate himself who resolutely
-                  pursues the coveted One Piece treasure and the King of the
-                  Pirates title that comes with it. The late King of the
-                  Pirates, Gol D. Roger, stirred up the world before his death
-                  by disclosing the whereabouts of his hoard of riches and
-                  daring everyone to obtain it. Ever since then, countless
-                  powerful pirates have sailed dangerous seas for the prized One
-                  Piece only to never return. Although Luffy lacks a crew and a
-                  proper ship, he is endowed with a superhuman ability and an
-                  unbreakable spirit that make him not only a formidable
-                  adversary but also an inspiration to many. As he faces
-                  numerous challenges with a big smile on his face, Luffy
-                  gathers one-of-a-kind companions to join him in his ambitious
-                  endeavor, together embracing perils and wonders on their
-                  once-in-a-lifetime adventure. [Written by MAL Rewrite]
+                  {{ anime?.description }}
                 </p>
                 <!-- InfoCard__Content--Episodes -->
                 <div class="flex flex-col gap-y-4">
@@ -235,6 +272,8 @@ const setInfoDropdown = (value: InfoSection) => {
 
                   <!-- Characters Dropdown -->
                   <PersonDropdown
+                    v-if="anime"
+                    :anime-cast="anime?.characters"
                     dropdown-title="Characters"
                     dropdown-type="characters"
                     :set-info-dropdown="setInfoDropdown"
@@ -242,6 +281,8 @@ const setInfoDropdown = (value: InfoSection) => {
                   />
                   <!-- Staff Dropdown -->
                   <PersonDropdown
+                    v-if="anime"
+                    :anime-cast="anime?.staff"
                     dropdown-title="Staff"
                     dropdown-type="staff"
                     :set-info-dropdown="setInfoDropdown"
@@ -257,7 +298,7 @@ const setInfoDropdown = (value: InfoSection) => {
           <AnimeCardContainer
             :count="6"
             header="Recommendations"
-            :anime-data="false"
+            :anime-data="null"
             :pending="false"
           />
         </div>
@@ -266,7 +307,7 @@ const setInfoDropdown = (value: InfoSection) => {
           class="max-2xl:4/11 mr-7 ml-12 flex w-3/11 max-w-100 flex-col justify-start gap-y-9 max-lg:hidden"
         >
           <!-- TRENDING__Anime -->
-          <TrendingAnime :pending="true" :anime-data="false" />
+          <TrendingAnime :pending="true" :anime-data="null" />
           <!-- TRENDING__Chat -->
           <TrendingChat />
         </div>

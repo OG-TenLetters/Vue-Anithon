@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { AnimeTop } from "~/types/animeFromAnilist";
 import TrendCardSkeleton from "./anime-skeletons/TrendCardSkeleton.vue";
 import TrendCard from "./TrendCard.vue";
 
 type Props = {
-  animeData: any | null;
+  animeData: AnimeTop[] | null;
   pending: boolean | null;
 };
 
@@ -84,7 +85,7 @@ const toggleTab = () => {
       <TrendCard
         v-else
         v-for="(anime, i) in animeData ?? []"
-        :key="anime.mal_id"
+        :key="anime.idMal"
         :anime="anime"
         :count="Number(i)"
       />

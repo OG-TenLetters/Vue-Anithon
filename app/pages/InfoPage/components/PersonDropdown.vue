@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import type { Person } from '~/types/animeFromAnilist';
+
+
 type Props = {
   dropdownTitle: string;
   infoDropdown: string | null;
   setInfoDropdown: any | null;
   dropdownType: string;
+  animeCast: Person[];
 };
 
 const props = defineProps<Props>();
+
+console.log(props.animeCast)
+
 </script>
 
 <template>
@@ -36,14 +43,17 @@ const props = defineProps<Props>();
         <!-- CharacterCard__Grid -->
         <div class="grid grid-cols-7 grid-rows-3 gap-y-8">
           <!-- CharacterCard -->
-          <div v-for="(_, i) in 20" :key="i" class="flex flex-col items-center">
+          <div v-for="charCard in animeCast" :key="charCard.name.full" class="flex flex-col items-center">
             <figure class="h-25 w-25 overflow-hidden rounded-2xl">
-              <div
-                class="to h-full w-full bg-red-800/50 bg-linear-to-r from-green-800/50"
+              <div v-if="!charCard"
+                class="h-full w-full bg-red-800/50 bg-linear-to-r from-green-800/50"
               ></div>
+              <img
+              v-if="charCard"
+              class="w-full object-contain" :src="charCard.image" alt="">
             </figure>
-            <h3>En Name</h3>
-            <h3>Jap Name</h3>
+            <h3>{{ charCard.name.native }}</h3>
+            <h3>{{ charCard.name.full }}</h3>
           </div>
         </div>
       </div>

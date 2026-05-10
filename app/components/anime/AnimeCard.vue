@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { Anime } from '~/types/animeFromAnilist';
+
 type Props = {
-  anime: any | null;
+  anime: Anime;
 };
 const props = defineProps<Props>();
 
@@ -61,7 +63,7 @@ const close = () => {
             </div>
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Genres:</h3>
-              <h3>{{ anime.genres.join(', ') }}</h3>
+              <h3>{{ anime.genres.slice(0, 3).join(', ') }}</h3>
             </div>
           </div>
 
@@ -115,7 +117,7 @@ const close = () => {
               <span class="font-bold max-md:font-normal">CC</span>N/A
             </h2>
           </div>
-          <h4 class="font-semibold">{{ null }}</h4>
+          <h4 class="font-semibold">{{ anime.format }}</h4>
         </div>
       </div>
     </NuxtLink>

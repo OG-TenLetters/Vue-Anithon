@@ -19,9 +19,9 @@ type CoverImage = {
 };
 
 type DateParts = {
-  year: number | null;
   month: number | null;
   day: number | null;
+  year: number | null;
 };
 
 type Name = {
@@ -31,16 +31,30 @@ type Name = {
 
 type Person = {
   name: Name;
-  image: string;
+  image: {
+    medium: string | null;
+  }
 };
 
-
 type StreamingEpisodes = {
-    url: string | null;
-    site: string | null;
-}
+  url: string | null;
+  site: string | null;
+};
 
-type AnimeBaseResponse = IdBase & {
+export type AnimeTopResponse = {
+  Page: {
+    media: {
+      id: number;
+      idMal: number;
+      title: Title;
+      format: string | null;
+      episodes: number | null;
+      coverImage: CoverImage;
+    }[];
+  };
+};
+
+export type AnimeBaseResponse = IdBase & {
   title: Title;
   format: string | null;
   status: string | null;
@@ -68,10 +82,21 @@ export type AnimeCarouselResponse = {
   };
 };
 
-export type AnimeInfoResponse = {
-  Media: AnimeBaseResponse & {
+
+export type AnimeInfoQuery = {
+  Media: AnimeInfoResponse
+}
+
+export type AnimeInfoResponse = AnimeBaseResponse & {
     coverImage: CoverImage;
+    averageScore: number | null;
+    synonyms: string[] | null;
     duration: number | null;
+    studios: {
+      nodes: {
+        name: string | null;
+      }[];
+    }
     staff: {
       nodes: Person[];
     };
@@ -79,5 +104,4 @@ export type AnimeInfoResponse = {
       nodes: Person[];
     };
     streamingEpisodes: StreamingEpisodes[];
-  }
 };

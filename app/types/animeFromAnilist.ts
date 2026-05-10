@@ -14,12 +14,14 @@ type Name = {
   full: string;
 };
 
-
-
-type Person = {
+export type Person = {
   name: Name;
-  image: string;
-}
+  image: string
+};
+
+type Studio = {
+  name: string;
+};
 
 type CoverImage = {
   medium: string;
@@ -28,23 +30,28 @@ type CoverImage = {
 };
 
 type DateParts = {
-  year: number | null;
-  month: number | null;
-  day: number | null;
+  month: number;
+  day: number;
+  year: number;
 };
-
-
 
 type StreamingEpisodes = {
   url: string;
   site: string;
 };
 
+export type AnimeTop = IdBase & {
+  title: Title;
+  format: string;
+  episodes: number;
+  coverImage: CoverImage;
+};
+
 export type AnimeBase = IdBase & {
   title: Title;
-  description: string | null;
-  format: string | null;
-  episodes: number | null;
+  description: string;
+  format: string;
+  episodes: number;
   genres: string[];
   status: string;
   isAdult: boolean;
@@ -52,19 +59,23 @@ export type AnimeBase = IdBase & {
   endDate: DateParts;
 };
 
-
 export type Anime = AnimeBase & {
   coverImage: CoverImage;
 };
 
 export type AnimeCarousel = AnimeBase & {
   bannerImage: string;
+  averageScore: number;
 };
 
 export type AnimeInfo = AnimeBase & {
   coverImage: CoverImage;
-  duration: number | null;
-  staff: Person [];
+  averageScore: number;
+  synonyms: string[];
+  duration: number;
+  studios: Studio[];
+  staff: Person[];
   characters: Person[];
   streamingEpisodes: StreamingEpisodes[];
 };
+
