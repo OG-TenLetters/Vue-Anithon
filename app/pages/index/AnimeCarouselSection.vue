@@ -81,16 +81,18 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
       :autoplay="{ delay: 6000 }"
     >
       <SwiperSlide v-for="anime in animeData" :key="anime.id">
+
         <div
           class="relative flex h-80 w-full items-center justify-start overflow-hidden text-white"
-        >
-          <img
+        >  
+          <NuxtLink :to="`/InfoPage/${anime.id}-${anime.idMal}`">
+            <img
             :src="anime.bannerImage"
             class="absolute inset-0 h-full w-full object-cover object-center"
-          />
-
+            />   
+          </NuxtLink>
           <div
-            class="absolute inset-0 bg-linear-to-r from-[#143e46]/20 via-black/20 to-transparent"
+            class="absolute inset-0 bg-linear-to-r from-[#143e46]/20 via-black/20 to-transparent pointer-events-none"
           ></div>
 
           <!-- CAROUSEL__InfoCard -->
