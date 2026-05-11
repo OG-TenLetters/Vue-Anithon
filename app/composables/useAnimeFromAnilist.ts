@@ -34,6 +34,8 @@ export const useAnimeFromAnilist = () => {
     return res.data.Page.media;
   };
 
+console.log("API URL:", config.public.apiAnilistUrl);
+
   const mapAnimeTop = (a: AnimeTopResponse): AnimeTop => {
     const title = {
       native: a.title?.native ?? "",
