@@ -2,53 +2,18 @@
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { dummyAnime } from "~/assets/dummyAnime";
-
-type Aired = {
-  from: string;
-  to: string | null;
-  string: string | null;
-};
-
-type Genre = {
-  mal_id: number;
-  name: string | null;
-};
-
-type Anime = {
-  mal_id: number;
-  title: string;
-  title_english?: string | null;
-  title_japanese?: string | null;
-  episodes: number | null;
-  type: string | null;
-  genres: Genre[];
-  synopsis: string | null;
-  rating: string | null;
-  aired: Aired;
-  // add more later as needed
-};
-
-const getAnime = async () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(dummyAnime);
-    }, 300);
-  });
-};
-
-const animeData = ref<Anime[]>([]);
-
-onMounted(async () => {
-  const res: any = await getAnime();
-  animeData.value = res.data;
-  // console.log(res.data);
-});
-
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwiperCore from "swiper";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import type { AnimeCarousel } from "~/types/animeFromAnilist";
 
-const addToList = ref(false);
+
+type Props = {
+  pending: boolean
+  animeData: AnimeCarousel[]
+}
+
+const props = defineProps<Props>()
 
 const tempAddToListToggle = () => {};
 
@@ -65,13 +30,12 @@ const onSwiper = (swiper: any) => {
   totalSlides.value = swiper.slides.length;
 };
 
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 
 const modules = [Navigation, Pagination, Autoplay, EffectFade];
 </script>
 
 <template>
-  <div class="carousel-mask relative px-6 max-md:px-0">
+  <div class="carousel-mask relative h-80 w-full px-6 max-md:px-0">
     <div>
       <!-- CAROUSEL Controls -->
       <div
@@ -86,7 +50,7 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 
         <!-- CAROUSEL Pagination -->
         <div class="pb-1 text-xl font-semibold text-white max-lg:text-sm">
-          {{ currentIndex + 1 }} / {{ totalSlides }}
+          {{ currentIndex + 1 }} / {{ 10 }}
         </div>
 
         <button @click="swiperRef?.slideNext()" class="">
@@ -100,12 +64,12 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
 
     <!-- CAROUSEL Banner Skeleton -->
     <div
-      v-if="!animeData.length"
-      class="h-80 animate-pulse rounded-xl bg-[#0b2429]"
+    v-if="pending === true"
+      class="h-80 w-full animate-pulse rounded-xl bg-[#0b2429]"
     ></div>
 
     <Swiper
-      v-if="animeData.length"
+    v-if="pending === false"
       @slideChange="onSlideChange"
       @swiper="onSwiper"
       class="max-h-130"
@@ -116,17 +80,19 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
       :loop="true"
       :autoplay="{ delay: 6000 }"
     >
-      <SwiperSlide v-for="(anime, i) in animeData" :key="anime.mal_id">
+      <SwiperSlide v-for="anime in animeData" :key="anime.id">
+
         <div
           class="relative flex h-80 w-full items-center justify-start overflow-hidden text-white"
-        >
-          <img
-            :src="`/download${i}.jpg`"
+        >  
+          <NuxtLink :to="`/InfoPage/${anime.id}-${anime.idMal}`">
+            <img
+            :src="anime.bannerImage"
             class="absolute inset-0 h-full w-full object-cover object-center"
-          />
-
+            />   
+          </NuxtLink>
           <div
-            class="absolute inset-0 bg-linear-to-r from-[#143e46]/20 via-black/20 to-transparent"
+            class="absolute inset-0 bg-linear-to-r from-[#143e46]/20 via-black/20 to-transparent pointer-events-none"
           ></div>
 
           <!-- CAROUSEL__InfoCard -->
@@ -134,7 +100,7 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
             class="relative z-10 flex flex-col gap-y-1 rounded-r-2xl bg-sky-950/85 py-6 pr-12 pl-19 max-xl:pl-14 max-md:px-8 max-sm:w-full max-sm:translate-y-8 max-sm:bg-linear-180 max-sm:from-sky-950/10 max-sm:to-black/40"
           >
             <h1 class="text-3xl font-bold max-md:text-2xl">
-              {{ anime.title ?? anime.title_english ?? anime.title_japanese }}
+              {{ anime.title.english ?? anime.title.romaji ?? anime.title.native }}
             </h1>
 
             <!-- CAROUSEL__InfoCard--Box1 -->
@@ -155,21 +121,18 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
                 <span class="font-bold">CC</span>{{ anime.episodes }}
               </h2>
               <span class="text-sky-200">|</span>
-              <h2 class="text-sm font-bold">{{ anime.type }}</h2>
+              <h2 class="text-sm font-bold">{{ anime.format }}</h2>
               <span class="text-sky-200">|</span>
               <h2
-                v-for="(genre, i) in anime.genres"
-                :key="genre.mal_id"
                 class="text-sm"
               >
-                {{ genre.name }}
-                <span v-if="i !== (anime.genres?.length ?? 0) - 1">,</span>
+                {{ anime.genres.slice(0, 3).join(', ') }}
               </h2>
             </div>
 
             <!-- CAROUSEL__InfoCard--Description -->
             <h2 class="line-clamp-2 max-w-120 pt-2 text-xs">
-              {{ anime.synopsis }}
+              {{ anime.description }}
             </h2>
 
             <!-- CAROUSEL__InfoCard--Box2 -->
@@ -180,11 +143,11 @@ const modules = [Navigation, Pagination, Autoplay, EffectFade];
                 class="flex flex-col items-center border-r-2 border-white/40 px-6 max-md:px-2"
               >
                 <h3>Rating</h3>
-                <h3 class="max-md:text-[10px]">{{ anime.rating }}</h3>
+                <h3 class="max-md:text-[10px]">{{ anime.averageScore }}</h3>
               </div>
               <div class="flex flex-col items-center px-6 max-md:px-2">
                 <h3>Release</h3>
-                <h3 class="max-md:text-[10px]">{{ anime.aired?.string }}</h3>
+                <h3 class="max-md:text-[10px]">{{ anime.startDate.year }} - {{ anime.endDate.year ? anime.endDate.year : 'Now' }}</h3>
               </div>
               <div
                 class="flex flex-col items-center border-l-2 border-white/40 px-6 max-md:px-2"

@@ -1,69 +1,53 @@
 <script setup lang="ts">
 import TrendingAnime from "~/components/anime/TrendingAnime.vue";
-import AnimeCarousel from "./index/AnimeCarousel.vue";
+import AnimeCarouselSection from "./index/AnimeCarouselSection.vue";
 import TrendingChat from "~/components/chat/TrendingChat.vue";
 import Divider from "~/components/ui/Divider.vue";
 import ShareBox from "~/components/ui/ShareBox.vue";
-import { useAnime } from "#imports";
+import { useAnimeFromAnilist } from "~/composables/useAnimeFromAnilist";
+import type { Anime, AnimeCarousel, AnimeTop } from "~/types/animeFromAnilist";
 
-const {
-  getAnime,
-  getTopAnime,
-  getGenreAnime,
-  getRecommendedAnime,
-  getAnimeById,
-  getSearchAnime,
-} = useAnime();
+const { getAnime, getCarouselAnime, getTopAnime } = useAnimeFromAnilist();
 // const source = ref<"all" | "top" | "genre" | "recommended" | "id" | "search">(
 //   "all",
 // );
+
 const searchQuery = ref<string>("");
 
-const { data: allAnime, pending: allAnimePending } = await useAsyncData(
+const animeId = ref<[number, number]>([0, 0]);
+
+
+const { data: popularAnime, pending: popularAnimePending } = useAsyncData<
+  AnimeCarousel[]
+>("popularAnime", () => getCarouselAnime(10, 1));
+const { data: allAnime, pending: allAnimePending } = useAsyncData<Anime[]>(
   "allAnime",
-  () => getAnime(),
-  { server: false },
+  () => getAnime(12, 3),
 );
-const { data: topAnime, pending: topAnimePending } = await useAsyncData(
-  "topAnime",
-  () => getTopAnime(),
-  { server: false },
-);
+const { data: currentAnime, pending: currentAnimePending } = useAsyncData<
+  Anime[]
+>("currentAnime", () => getAnime(3, 1));
 const { data: recommendedAnime, pending: recommendedAnimePending } =
-  await useAsyncData("recommendedAnime", () =>  getRecommendedAnime(), {
-    server: false,
-  });
+  useAsyncData<Anime[]>("recommendedAnime", () => getAnime(6, 3));
+const { data: topAnime, pending: topAnimePending } = useAsyncData<AnimeTop[]>(
+  "topAnime",
+  () => getTopAnime(10, 1),
+);
 
-console.log("My Recommended:", recommendedAnime.value);
-console.log("Is Pending Even Working?:", allAnimePending.value);
 
-// const load = async () => {
-//   switch (source.value) {
-//     case "top":
-//       animeData.value = await getTopAnime();
-//       break;
-//     case "genre":
-//       animeData.value = await getGenreAnime("action");
-//       break;
-//     case "recommended":
-//       animeData.value = await getRecommendedAnime();
-//     case "id":
-//       animeData.value = await getAnimeById(5);
-//       break;
-//     case "search":
-//       animeData.value = await getSearchAnime(searchQuery.value);
-//       break;
-//     default:
-//       animeData.value = await getAnime();
-//   }
-// };
-
-// onMounted(load)
+const safePopularAnime = computed(() => popularAnime.value ?? []);
+const safeAllAnime = computed(() => allAnime.value ?? []);
+const safeCurrentAnime = computed(() => currentAnime.value ?? []);
+const safeRecommendedAnime = computed(() => recommendedAnime.value ?? []);
+const safeTopAnime = computed(() => topAnime.value ?? []);
 </script>
 
 <template>
   <div class="m-auto max-w-480 pt-20 max-sm:pt-16">
-    <AnimeCarousel />
+    <AnimeCarouselSection
+      :anime-data="safePopularAnime"
+      :pending="popularAnimePending"
+    />
     <div class="flex flex-col gap-y-4 px-10 pb-8 max-xl:px-5 max-sm:px-2">
       <div
         class="flex h-full w-full justify-center gap-x-2 rounded-3xl bg-[#1c0d35]/90 pb-7 text-white"
@@ -74,22 +58,25 @@ console.log("Is Pending Even Working?:", allAnimePending.value);
 
           <!-- ANIMECARD__Containers -->
           <AnimeCardContainer
-            :pending="null"
-            :anime-data="null"
+            :pending="currentAnimePending"
+            justify-where="center"
+            :anime-data="safeCurrentAnime"
             header="Currently Watching"
-            :count="0"
+            :count="3"
           />
           <Divider class="opacity-30" />
           <AnimeCardContainer
             :pending="allAnimePending"
-            :anime-data="allAnime"
+            justify-where="center"
+            :anime-data="safeAllAnime"
             header="Latest Updates"
             :count="12"
           />
           <Divider class="opacity-30" />
           <AnimeCardContainer
             :pending="recommendedAnimePending"
-            :anime-data="recommendedAnime"
+            justify-where="center"
+            :anime-data="safeRecommendedAnime"
             header="Recommended"
             :count="6"
           />
@@ -98,9 +85,8 @@ console.log("Is Pending Even Working?:", allAnimePending.value);
           class="max-2xl:4/11 mr-7 ml-12 flex w-3/11 max-w-100 flex-col justify-start gap-y-9 max-lg:hidden"
         >
           <!-- TRENDING__Box -->
-          <TrendingAnime 
-          :pending="topAnimePending"
-          :anime-data="topAnime" />
+          <TrendingAnime
+          :pending="topAnimePending" :anime-data="safeTopAnime" />
           <TrendingChat />
         </div>
       </div>

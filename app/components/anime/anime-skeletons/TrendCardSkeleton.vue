@@ -3,12 +3,12 @@ import Divider from "~/components/ui/Divider.vue";
 </script>
 
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center select-none">
     <figure
       class="skeleton1 relative flex aspect-square max-w-20 min-w-19 items-center justify-center overflow-hidden rounded-2xl border border-sky-500 max-xl:aspect-12/16 max-xl:max-w-15 max-xl:min-w-14"
     ></figure>
     <div
-      class="-ml-6 flex w-full gap-y-1 flex-col rounded-r-2xl bg-gray-950 px-6 py-3 pl-10"
+      class="-ml-6 flex w-full flex-col gap-y-1 rounded-r-2xl bg-gray-950 px-6 py-3 pl-10"
     >
       <h2
         class="skeleton2 mb-1 line-clamp-1 rounded-lg text-transparent max-xl:text-sm"
