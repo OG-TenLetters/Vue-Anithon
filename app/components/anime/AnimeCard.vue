@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { Anime } from "~/types/animeFromAnilist";
+
 type Props = {
-  anime: any | null;
+  anime: Anime;
 };
 const props = defineProps<Props>();
 
@@ -37,17 +39,19 @@ const close = () => {
         >
           <Icon class="bg-blue-950 text-2xl" name="mingcute:information-fill" />
         </div>
-        <h3 class="font-bold">{{ anime.title }}</h3>
+        <h3 class="font-bold">
+          {{ anime.title.english || anime.title.native }}
+        </h3>
 
-        <p class="line-clamp-3 text-xs text-gray-300">
-          {{ anime.synopsis }}
+        <p class="line-clamp-3 text-xs font-semibold text-gray-400">
+          {{ anime.description }}
         </p>
 
         <div class="flex items-center justify-between">
           <div class="my-2 w-4/5 text-xs text-white">
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Aired:</h3>
-              <h3>{{ anime.aired }}</h3>
+              <h3>{{ anime.startDate.year }}</h3>
             </div>
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Status:</h3>
@@ -61,7 +65,7 @@ const close = () => {
             </div>
             <div class="flex gap-x-1">
               <h3 class="text-gray-300">Genres:</h3>
-              <h3>{{ anime.genres.join(", ") }}</h3>
+              <h3>{{ anime.genres.slice(0, 3).join(", ") }}</h3>
             </div>
           </div>
 
@@ -72,7 +76,7 @@ const close = () => {
           </button>
         </div>
 
-        <NuxtLink :to="`/InfoPage/${anime.id}`">
+        <NuxtLink :to="`/InfoPage/${anime.id}-${anime.idMal}`">
           <button
             class="mt-2 w-full rounded-lg border-2 border-white/20 bg-violet-950/60 px-3 py-1 tracking-wider text-purple-200 transition-all duration-300 hover:border-gray-400 hover:text-gray-100 hover:active:border-sky-600 hover:active:bg-transparent hover:active:text-sky-600"
           >
@@ -82,19 +86,23 @@ const close = () => {
       </div>
     </div>
 
-    <NuxtLink :to="`/InfoPage/${anime.id}`">
+    <NuxtLink :to="`/InfoPage/${anime.id}-${anime.idMal}`">
       <!-- ANIMECARD__Image -->
       <figure
-        class="flex items-center justify-center aspect-7/11 overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80 max-2xl:rounded-xl"
+        class="flex aspect-7/11 items-center justify-center overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2 group-hover:brightness-80 max-2xl:rounded-xl"
       >
-        <img class="h-full w-full scale-105" :src="anime.images.medium" alt="" />
+        <img
+          class="h-full w-full scale-105"
+          :src="anime.coverImage?.large"
+          alt=""
+        />
       </figure>
       <div class="flex flex-col">
         <!-- ANIMECARD__Title -->
         <h3
-          class="max-w-40 py-2 text-sm font-semibold transition-all duration-300 group-hover:-translate-y-2 hover:text-gray-400 max-h-8 overflow-hidden  max-2xl:line-clamp-1 max-2xl:text-xs"
+          class="max-h-8 max-w-40 overflow-hidden py-2 text-sm font-semibold transition-all duration-300 group-hover:-translate-y-2 hover:text-gray-400 max-2xl:line-clamp-1 max-2xl:text-xs"
         >
-          {{ anime.title }}
+          {{ anime.title.english || anime.title.native }}
         </h3>
         <!-- ANIMECARD__InfoBox -->
         <div
@@ -115,7 +123,7 @@ const close = () => {
               <span class="font-bold max-md:font-normal">CC</span>N/A
             </h2>
           </div>
-          <h4 class="font-semibold">{{ anime.type }}</h4>
+          <h4 class="font-semibold">{{ anime.format }}</h4>
         </div>
       </div>
     </NuxtLink>

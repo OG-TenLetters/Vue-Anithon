@@ -41,7 +41,6 @@ export const useAnime = () => {
   const getAnime = async (): Promise<Anime[]> => {
     // const res: any = await $fetch(`${config.public.apiJikanUrl}/anime`);  OLD WAY
     const res: any = await jikan("/anime?page=1&limit=12");
-    console.log("Jikan's Regular:", res.data);
     return res.data.map(mapAnime);
   };
   const getAnimeById = async (id: number): Promise<Anime> => {
